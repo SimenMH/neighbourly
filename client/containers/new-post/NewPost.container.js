@@ -37,7 +37,7 @@ export default function NewPost ({navigation}) {
           maxLength={345 - (lineBreaks * 23)} // For each linebreak, decrease the max length by 23
           style={styles.input}
           onChangeText={setText}
-          placeholder={'Share your thoughts and experiences with the people around you'}
+          placeholder={'Share your thoughts and experiences with the neighbours around you'}
         />
       </ScrollView>
     </View>
