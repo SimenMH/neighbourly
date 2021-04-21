@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 
 import TopBar from './components/bars/TopBar.component';
 import BottomBar from './components/bars/BottomBar.component';
-import Home from './containers/home/Home.container';
+import Main from './containers/main/Main.container';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <TopBar />
-        <Home />
+        <Main />
         <BottomBar />
         <StatusBar style="auto" />
       </View>

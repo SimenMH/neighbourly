@@ -5,7 +5,7 @@ import PostList from '../../components/post-list/PostList.component';
 
 import corkBackground from '../../assets/cork-texture01.jpg'
 
-export default function Home (props) {
+export default function Main (props) {
   return (
     <View style={styles.container}>
       <ImageBackground source={corkBackground} style={styles.background} />
