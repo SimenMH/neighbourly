@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 
-export default function BottomBar (props) {
+export default function BottomBar ({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.bottomBar}>
@@ -13,7 +13,7 @@ export default function BottomBar (props) {
         </View>
       </View>
       <View style={styles.addButtonBack}>
-        <TouchableOpacity onPress={() => console.log('Add Post')} activeOpacity={0.5}>
+        <TouchableOpacity onPress={() => navigation.navigate('Create')} activeOpacity={0.5}>
           <View style={styles.addButton}>
             <View style={styles.plusIcon}>
               <View style={styles.plusVer}>

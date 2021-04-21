@@ -7,7 +7,7 @@ import BottomBar from '../../components/bars/BottomBar.component';
 
 import corkBackground from '../../assets/cork-texture01.jpg';
 
-export default function Main (props) {
+export default function Main ({navigation}) {
   return (
     <View style={styles.container}>
       <TopBar />
@@ -15,7 +15,7 @@ export default function Main (props) {
         <ImageBackground source={corkBackground} style={styles.background} />
         <PostList />
       </View>
-      <BottomBar />
+      <BottomBar navigation={navigation}/>
     </View>
   );
 }
