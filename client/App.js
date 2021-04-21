@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 
 import Main from './containers/main/Main.container';
-import Create from './containers/new-post/Create.container';
+import NewPost from './containers/new-post/NewPost.container';
 
 const Stack = createStackNavigator();
 
