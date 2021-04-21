@@ -3,7 +3,7 @@ import { StyleSheet, View, ImageBackground } from 'react-native';
 import PostList from '../../components/post-list/PostList.component';
 
 
-const corkBackground = require('../../assets/cork-texture01.jpg')
+import corkBackground from '../../assets/cork-texture01.jpg'
 
 export default function Home (props) {
   return (
