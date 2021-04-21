@@ -1,15 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
+
 import PostList from '../../components/post-list/PostList.component';
+import TopBar from '../../components/bars/TopBar.component';
+import BottomBar from '../../components/bars/BottomBar.component';
 
-
-import corkBackground from '../../assets/cork-texture01.jpg'
+import corkBackground from '../../assets/cork-texture01.jpg';
 
 export default function Main (props) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={corkBackground} style={styles.background} />
-      <PostList />
+      <TopBar />
+      <View>
+        <ImageBackground source={corkBackground} style={styles.background} />
+        <PostList />
+      </View>
+      <BottomBar />
     </View>
   );
 }
@@ -17,8 +23,11 @@ export default function Main (props) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%'
+    flex: 1,
+    backgroundColor: '#BAA47A',
+    alignItems: 'center',
+    flexDirection: 'column',
+    width: '100%'
   },
   background: {
     position: 'absolute',
@@ -26,4 +35,4 @@ const styles = StyleSheet.create({
     width: '100%',
     opacity: 0.1,
   },
-})
+});
