@@ -1,3 +1,11 @@
+// POST DATA SHOULD LOOK LIKE THIS
+// id: String,
+// content: String,
+// timestamp: String,
+// color: String,
+
+// Character limit for posts should be 650. Linebreak should equal 24 characters
+
 export const POSTS = [
   {
     id: '0',
