@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View, Text } from 'react-native';
+import { useFonts } from 'expo-font';
+
+import TopBar from './components/bars/TopBar.component';
+import BottomBar from './components/bars/BottomBar.component';
+import Home from './containers/home/Home.container';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  let [fontsLoaded] = useFonts({
+    'PoetsenOne': require('./assets/fonts/Poetsenone.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <TopBar />
+        <Home />
+        <BottomBar />
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#BAA47A',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    flexDirection: 'column',
+  }
 });
