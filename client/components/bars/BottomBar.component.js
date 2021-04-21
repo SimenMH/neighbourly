@@ -13,7 +13,7 @@ export default function BottomBar ({navigation}) {
         </View>
       </View>
       <View style={styles.addButtonBack}>
-        <TouchableOpacity onPress={() => navigation.navigate('Create')} activeOpacity={0.5}>
+        <TouchableOpacity onPress={() => navigation.navigate('NewPost')} activeOpacity={0.5}>
           <View style={styles.addButton}>
             <View style={styles.plusIcon}>
               <View style={styles.plusVer}>
