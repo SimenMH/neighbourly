@@ -1,0 +1,22 @@
+{
+  "name": "neighbourly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimenMH/neighbourly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SimenMH/neighbourly/issues"
+  },
+  "homepage": "https://github.com/SimenMH/neighbourly#readme",
+  "dependencies": {
+    "commitizen": "^4.2.3"
+  }
+}
