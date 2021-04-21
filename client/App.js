@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 
 import Main from './containers/main/Main.container';
-import Create from './containers/create/Create.container';
+import Create from './containers/new-post/Create.container';
 
 const Stack = createStackNavigator();
 
@@ -24,9 +24,10 @@ export default function App() {
   } else {
     return (
       <NavigationContainer style={styles.container}>
-        <Stack.Navigator>
+        {/* screenOptions={{ animationEnabled: false }} */}
+        <Stack.Navigator> 
           <Stack.Screen name="Main" component={Main} options={{ headerShown: false }}/>
-          <Stack.Screen name="Create" component={Create} options={{ headerShown: false }}/>
+          <Stack.Screen name="NewPost" component={NewPost} options={{ headerShown: false }}/>
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>
