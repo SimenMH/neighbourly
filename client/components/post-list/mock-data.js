@@ -56,7 +56,6 @@ export const POSTS = [
 
 export const addPost = (text) => {
   const id = POSTS.length.toString()
-  console.log(id)
   POSTS.unshift({
     id: id,
     content: text

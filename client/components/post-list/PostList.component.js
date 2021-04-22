@@ -4,11 +4,6 @@ import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 import Post from '../post/Post.component';
 import { POSTS } from './mock-data';
 
-
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
-
 export default function PostList (props) {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -32,7 +27,6 @@ export default function PostList (props) {
           />
         }
       />
-      
     </View>
   );
 }
@@ -44,22 +38,3 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
 });
-
-
-
-
-
-// const [refreshing, setRefreshing] = useState(false);
-
-//   const onRefresh = () => {
-//     setRefreshing(true);
-//     setTimeout(() => {setRefreshing(false)}, 2000)
-//   };
-
-
-// refreshControl={
-//   <RefreshControl
-//     refreshing={refreshing}
-//     onRefresh={() => onRefresh()}
-//   />
-// }
