@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 
 import logo from '../../assets/logo.png';
+import settingsIcon from '../../assets/button-icons/settings-icon.png';
 
 export default function TopBar (props) {
   return (
@@ -9,7 +10,9 @@ export default function TopBar (props) {
       <View style={styles.container}>
         <Image style={styles.logo} source={logo} />
         <Text style={styles.title}>Neighbourly</Text>
-        <View style={styles.settingsBtn}/>
+        <TouchableOpacity style={styles.settingsBtn} activeOpacity={0.8}>
+          <Image source={settingsIcon} style={{height: '100%', width: '100%'}}/>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -45,6 +48,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   settingsBtn: {
-    
+    position: 'absolute',
+    top: 35,
+    right: 15,
+    width: 30,
+    height: 30,
   }
 })

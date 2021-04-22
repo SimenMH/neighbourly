@@ -2,6 +2,7 @@
 // id: String,
 // content: String,
 // timestamp: String,
+// location: String,
 // color: String,
 
 // Character limit for posts should be 650. Linebreak should equal 24 characters
@@ -9,7 +10,7 @@
 export const POSTS = [
   {
     id: '0',
-    content: 'OOOOOOOOOOOOOOOOOOOOOOO'
+    content: 'This is a post'
   },
   {
     id: '1',
