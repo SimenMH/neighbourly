@@ -1,15 +1,49 @@
-import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+
+import homeIcon from '../../assets/button-icons/home-icon.png';
+import noticeIcon from '../../assets/button-icons/notice-icon.png';
+import eventIcon from '../../assets/button-icons/event-icon.png';
+import favorIcon from '../../assets/button-icons/favor-icon.png';
 
 export default function BottomBar ({navigation}) {
+  const [selected, setSelected] = useState('home')
   return (
     <View style={styles.container}>
       <View style={styles.bottomBar}>
         <View style={styles.buttonContainer}>
-          {/* <View>Home/Main</View>
-          <View>Notices</View>
-          <View>Events</View>
-          <View>Help/Favours</View> */}
+          <View style={styles.innerButtonContainer}>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => setSelected('home')}
+              activeOpacity={0.8}
+              >
+              <Image source={homeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'home' ? 1 : 0.5}}/>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.iconButton, { marginRight: 30 }]}
+              onPress={() => setSelected('notice')}
+              activeOpacity={0.8}
+              >
+              <Image source={noticeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'notice' ? 1 : 0.5}}/>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.innerButtonContainer}>
+          <TouchableOpacity
+              style={[styles.iconButton, { marginLeft: 30 }]}
+              onPress={() => setSelected('event')}
+              activeOpacity={0.8}
+              >
+              <Image source={eventIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'event' ? 1 : 0.5}}/>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={() => setSelected('favor')}
+              activeOpacity={0.8}
+              >
+              <Image source={favorIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'favor' ? 1 : 0.5}}/>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <View style={styles.addButtonBack}>
@@ -48,8 +82,21 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  innerButtonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 30,
+  },
+  iconButton: {
+    height: 40,
+    width: 40,
+    // opacity: 0.5
   },
   addButtonBack: {
     flex: 1,
