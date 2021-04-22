@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 
 import { addPost } from '../../components/post-list/mock-data';
+
+import backIcon from '../../assets/button-icons/back-icon-alt.png';
 
 export default function NewPost ({navigation}) {
   const [text, setText] = useState('')
@@ -15,19 +17,22 @@ export default function NewPost ({navigation}) {
 
   const postIt = () => {
     // Replace this with api service
-    addPost(text);
-    setText('');
-    navigation.navigate('Main');
+    if (text) {
+      addPost(text);
+      setText('');
+      navigation.navigate('Main');
+    }
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.navigate('Main')} activeOpacity={0.5}>
-          <Text style={styles.barButton}>Back</Text>
+          <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
+          {/* <Text style={styles.barButton}>Back</Text> */}
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.barButton} onPress={postIt}>Post</Text>
+        <TouchableOpacity onPress={postIt} activeOpacity={0.5}>
+          <Text style={styles.barButton}>Post</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.inputView}>
