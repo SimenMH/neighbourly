@@ -6,8 +6,14 @@ import noticeIcon from '../../assets/button-icons/notice-icon.png';
 import eventIcon from '../../assets/button-icons/event-icon.png';
 import favorIcon from '../../assets/button-icons/favor-icon.png';
 
-export default function BottomBar ({navigation}) {
-  const [selected, setSelected] = useState('home')
+export default function BottomBar ({navigation, handleClick}) {
+  const [selected, setSelected] = useState('home');
+
+  const goTo = (screen) => {
+    setSelected(screen);
+    handleClick(screen);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.bottomBar}>
@@ -15,14 +21,14 @@ export default function BottomBar ({navigation}) {
           <View style={styles.innerButtonContainer}>
             <TouchableOpacity
               style={styles.iconButton}
-              onPress={() => setSelected('home')}
+              onPress={() => goTo('home')}
               activeOpacity={0.8}
               >
               <Image source={homeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'home' ? 1 : 0.5}}/>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.iconButton, { marginRight: 30 }]}
-              onPress={() => setSelected('notice')}
+              onPress={() => goTo('notice')}
               activeOpacity={0.8}
               >
               <Image source={noticeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'notice' ? 1 : 0.5}}/>
@@ -31,14 +37,14 @@ export default function BottomBar ({navigation}) {
           <View style={styles.innerButtonContainer}>
           <TouchableOpacity
               style={[styles.iconButton, { marginLeft: 30 }]}
-              onPress={() => setSelected('event')}
+              onPress={() => goTo('event')}
               activeOpacity={0.8}
               >
               <Image source={eventIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'event' ? 1 : 0.5}}/>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconButton}
-              onPress={() => setSelected('favor')}
+              onPress={() => goTo('favor')}
               activeOpacity={0.8}
               >
               <Image source={favorIcon} style={{flex: 1, height: '100%', width: '100%', opacity: selected === 'favor' ? 1 : 0.5}}/>
@@ -47,7 +53,7 @@ export default function BottomBar ({navigation}) {
         </View>
       </View>
       <View style={styles.addButtonBack}>
-        <TouchableOpacity onPress={() => navigation.navigate('NewPost')} activeOpacity={0.5}>
+        <TouchableOpacity onPress={() => navigation.navigate('NewPost', {type: selected})} activeOpacity={0.5}>
           <View style={styles.addButton}>
             <View style={styles.plusIcon}>
               <View style={styles.plusVer}>

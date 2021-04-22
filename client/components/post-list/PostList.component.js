@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 
 import Post from '../post/Post.component';
-import { POSTS } from './mock-data';
 
 export default function PostList (props) {
   const [refreshing, setRefreshing] = useState(false);
@@ -15,9 +14,10 @@ export default function PostList (props) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={POSTS}
+        data={props.posts}
         renderItem={Post}
         keyExtractor={post => post.id}
+        style={{minWidth: '100%'}}
         contentContainerStyle={{ paddingBottom: 100}}
         showsVerticalScrollIndicator={false}
         refreshControl={

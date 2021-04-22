@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 
-import { addPost } from '../../components/post-list/mock-data';
+import { addPost } from '../main/mock-data';
 
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
 
-export default function NewPost ({navigation}) {
+export default function NewPost ({navigation, route}) {
   const [text, setText] = useState('')
   const [lineBreaks, setLineBreaks] = useState(0)
 
@@ -18,7 +18,7 @@ export default function NewPost ({navigation}) {
   const postIt = () => {
     // Replace this with api service
     if (text) {
-      addPost(text);
+      addPost(text, route.params.type);
       setText('');
       navigation.navigate('Main');
     }
