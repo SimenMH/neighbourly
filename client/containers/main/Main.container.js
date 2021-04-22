@@ -10,8 +10,8 @@ import corkBackground from '../../assets/cork-texture01.jpg';
 import { POSTS } from './mock-data';
 
 export default function Main ({navigation}) {
-  const [screen, setScreen] = useState('home')
-  const [posts, setPosts] = useState(POSTS.home)
+  const [screen, setScreen] = useState('home');
+  const [posts, setPosts] = useState(POSTS.home);
 
   const goTo = (newScreen) => {
     setScreen(newScreen);
@@ -19,7 +19,11 @@ export default function Main ({navigation}) {
 
   useEffect(() => {
     setPosts(POSTS[screen]);
-  }, [screen])
+  }, [screen]);
+
+  const navigateNewPost = () => {
+    navigation.navigate('NewPost', {type: screen, setPosts: () => {setPosts(POSTS[screen])}})
+  }
 
 
   return (
@@ -29,7 +33,7 @@ export default function Main ({navigation}) {
         <ImageBackground source={corkBackground} style={styles.background} />
         <PostList posts={posts}/>
       </View>
-      <BottomBar navigation={navigation} handleClick={(newScreen) => goTo(newScreen)}/>
+      <BottomBar screen={screen} navigateNewPost={() => navigateNewPost()} changeScreen={(newScreen) => goTo(newScreen)}/>
     </View>
   );
 }

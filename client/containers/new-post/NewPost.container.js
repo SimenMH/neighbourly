@@ -17,10 +17,12 @@ export default function NewPost ({navigation, route}) {
 
   const postIt = () => {
     // Replace this with api service
+    const {type, callback} = route.params
     if (text) {
-      addPost(text, route.params.type);
+      addPost(text, type);
       setText('');
       navigation.navigate('Main');
+      callback();
     }
   }
 
