@@ -17,6 +17,10 @@ const post = new mongoose.Schema(
     color: {
       type: Number,
       required: true
+    },
+    identifier: {
+      type: String,
+      required: false
     }
   },
   { timestamps: true }

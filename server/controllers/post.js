@@ -1,8 +1,18 @@
 const Post = require('../models/post');
+const measureDistance = require('../helpers/meterDistance');
+
+const maxDist = 250
 
 async function getPosts (ctx) {
   try {
-    ctx.body = await Post.find()
+    let pos = ctx.params.pos.split(',');
+    pos = { lat: parseFloat(pos[0]), lon: parseFloat(pos[1]) };
+    const posts = await Post.find();
+    const filteredPosts = posts.filter(post => {
+      const distance = measureDistance.distanceInMeters(pos, { lat: post.latitude, lon: post.longitude });
+      return distance <= maxDist;
+    });
+    ctx.body = filteredPosts.reverse();
     ctx.status = 200;
   } catch (err) {
     console.log(err);
@@ -12,8 +22,8 @@ async function getPosts (ctx) {
 
 async function createPost (ctx) {
   try {
-    const { post } = ctx.request.body;
-    ctx.body = await Post.create( post );
+    const post = ctx.request.body;
+    ctx.body = await Post.create(post);
     ctx.status = 201;
   } catch (err) {
     console.log(err);
@@ -32,4 +42,4 @@ async function deletePost (ctx) {
   }
 }
 
-module.exports = { getPosts, createPost, editPost, deletePost }
+module.exports = { getPosts, createPost, deletePost }
