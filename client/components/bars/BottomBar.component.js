@@ -8,9 +8,7 @@ import favorIcon from '../../assets/button-icons/favor-icon.png';
 
 export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
 
-  const goTo = (screen) => {
-    changeScreen(screen);
-  }
+  const goTo = screen => changeScreen(screen);
 
   return (
     <View style={styles.container}>

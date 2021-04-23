@@ -6,9 +6,7 @@ export default function MapScreen (props) {
   const coords = props.route.params.coordinates;
   const [pickedLocation, setPickedLocation] = useState(coords)
   
-  const selectLocationHandler = e => {
-    setPickedLocation({...e.nativeEvent.coordinate})
-  }
+  const selectLocationHandler = e => setPickedLocation({...e.nativeEvent.coordinate})
   
   const mapRegion = {
     ...coords,

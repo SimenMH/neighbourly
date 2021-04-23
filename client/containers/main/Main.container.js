@@ -14,9 +14,7 @@ export default function Main ({navigation}) {
   const [screen, setScreen] = useState('home');
   const [posts, setPosts] = useState(POSTS.home);
 
-  const goTo = (newScreen) => {
-    setScreen(newScreen);
-  };
+  const goTo = (newScreen) => setScreen(newScreen);
 
   const checkForUser = async () => {
     const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
