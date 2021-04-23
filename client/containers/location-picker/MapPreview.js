@@ -9,20 +9,11 @@ export default function MapPreview (props) {
   }
 
   return (
-    <View style={styles.mapPreview}>
-    {props.location ?
-      <Image source={{uri: mapUrl}} style={styles.map}/> :
-      <Text>No location chosen yet!</Text>
-    }
-    </View>
+    <Image source={{uri: mapUrl}} style={styles.map}/>
   );
 }
 
 const styles = StyleSheet.create({
-  mapPreview: {
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
   map: {
     width: 400,
     height: 200
