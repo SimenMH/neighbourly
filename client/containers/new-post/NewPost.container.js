@@ -40,7 +40,6 @@ export default function NewPost ({navigation, route}) {
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.5}>
           <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
-          {/* <Text style={styles.barButton}>Back</Text> */}
         </TouchableOpacity>
         <TouchableOpacity onPress={postIt} activeOpacity={0.5}>
           <Text style={styles.barButton}>Post</Text>

@@ -1,5 +1,4 @@
 const Post = require('../models/post');
-const measureDistance = require('../helpers/meterDistance');
 
 async function createPost (ctx) {
   try {

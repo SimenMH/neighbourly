@@ -1,5 +1,4 @@
 const Notice = require('../models/notice');
-const measureDistance = require('../helpers/meterDistance');
 
 async function createNotice (ctx) {
   try {
