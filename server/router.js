@@ -2,6 +2,8 @@ const koaRouter = require('koa-router');
 const getAllController = require('./controllers/getAllController');
 const postController = require('./controllers/post')
 const noticeController = require('./controllers/notice')
+const eventController = require('./controllers/event');
+const favorController = require('./controllers/favor');
 
 const router = new koaRouter();
 
@@ -17,7 +19,11 @@ router.post('/api/notice', noticeController.createNotice) // Creates a new post
 router.delete('/api/notice/:id', noticeController.deleteNotice) // Deletes a post
 
 // Routing for events
+router.post('/api/event', eventController.createEvent) // Creates a new post
+router.delete('/api/event/:id', eventController.deleteEvent) // Deletes a post
 
 // Routing for favors
+router.post('/api/favor', favorController.createFavor) // Creates a new post
+router.delete('/api/favor/:id', favorController.deleteFavor) // Deletes a post
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const post = new mongoose.Schema(
+const favor = new mongoose.Schema(
   {
     content: {
       type: String,
@@ -26,6 +26,6 @@ const post = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Post = mongoose.model('post', post)
+const Favor = mongoose.model('favor', favor)
 
-module.exports = Post;
+module.exports = Favor;

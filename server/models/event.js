@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const post = new mongoose.Schema(
+const event = new mongoose.Schema(
   {
     content: {
       type: String,
@@ -21,11 +21,13 @@ const post = new mongoose.Schema(
     identifier: {
       type: String,
       required: false
-    }
+    },
+    eventDate: String,
+    interest: Number
   },
   { timestamps: true }
 );
 
-const Post = mongoose.model('post', post)
+const Event = mongoose.model('event', event)
 
-module.exports = Post;
+module.exports = Event;
