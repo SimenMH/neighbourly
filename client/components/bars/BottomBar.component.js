@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 import homeIcon from '../../assets/button-icons/home-icon.png';

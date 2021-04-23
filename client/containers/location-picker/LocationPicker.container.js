@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, Text, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, View, Button, ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 

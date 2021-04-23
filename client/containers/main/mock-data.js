@@ -1,13 +1,11 @@
-// POST DATA SHOULD LOOK LIKE THIS
-
-
+// POST DATA WILL LOOK LIKE THIS
 // id: String,
 // content: String,
 // timestamp: String,
-// location: String, --latitude and longitude
+// location: String, // Stringified latitude and longitude object
 // color: String,
 
-// Character limit for posts should be 650. Linebreak should equal 24 characters
+// Character limit for posts should be 345. Linebreak should equal 23 characters
 
 export const POSTS = {
   home: [
