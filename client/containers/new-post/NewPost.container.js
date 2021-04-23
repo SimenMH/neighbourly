@@ -7,6 +7,7 @@ import { createPost } from '../../services/ApiService.service';
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
 
 export default function NewPost ({navigation, route}) {
+  const { type } = route.params;
   const [text, setText] = useState('')
   const [lineBreaks, setLineBreaks] = useState(0)
 
@@ -17,7 +18,7 @@ export default function NewPost ({navigation, route}) {
   }, [text])
 
   const postIt = async () => {
-    const {type, refreshPosts} = route.params
+    const { refreshPosts } = route.params
     if (text) {
       let position = await AsyncStorage.getItem('@neighbourly_location')
       position = JSON.parse(position);
