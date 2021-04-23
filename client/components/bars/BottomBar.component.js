@@ -63,7 +63,6 @@ export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
   )
 }
 
-
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
