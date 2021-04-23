@@ -20,6 +20,7 @@ export default function App() {
 
   const resetApp = async () => {
     await AsyncStorage.removeItem('@neighbourly_location');
+    await AsyncStorage.removeItem('@neighbourly_authored');
   }
 
   useState(() => {

@@ -28,7 +28,13 @@ export default function NewPost ({navigation, route}) {
         longitude: position.longitude,
         color: 3 // TODO: make this random
       }
-      await createPost(post)
+      const newPost = await createPost(post)
+
+      let authored = await AsyncStorage.getItem('@neighbourly_authored')
+      if (!authored) authored = '[]';
+      authored = JSON.stringify([...(JSON.parse(authored)), newPost._id]);
+      await AsyncStorage.setItem('@neighbourly_authored', authored);
+      authored = await AsyncStorage.getItem('@neighbourly_authored')
       setText('');
       navigation.goBack();
       refreshPosts();
