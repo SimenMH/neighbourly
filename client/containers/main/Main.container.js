@@ -39,14 +39,14 @@ export default function Main ({navigation}) {
 
   useEffect(() => {
     checkForUser();
-  }, [])
+  }, []);
 
   return (
     <View style={styles.container}>
       <TopBar navigateSettings={navigateSettings} />
       <View>
         <ImageBackground source={corkBackground} style={styles.background} />
-        <PostList posts={posts} handleRefresh={(cb) => refreshPosts(cb)}/>
+        <PostList posts={posts[screen]} handleRefresh={(cb) => refreshPosts(cb)}/>
       </View>
       <BottomBar screen={screen} navigateNewPost={() => navigateNewPost()} changeScreen={(newScreen) => goTo(newScreen)}/>
     </View>
