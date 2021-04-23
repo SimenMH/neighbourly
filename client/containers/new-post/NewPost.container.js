@@ -17,19 +17,19 @@ export default function NewPost ({navigation, route}) {
 
   const postIt = () => {
     // Replace this with api service
-    const {type, callback} = route.params
+    const {type, refreshPosts} = route.params
     if (text) {
       addPost(text, type);
       setText('');
-      navigation.navigate('Main');
-      callback();
+      navigation.goBack();
+      refreshPosts();
     }
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => navigation.navigate('Main')} activeOpacity={0.5}>
+        <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.5}>
           <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
           {/* <Text style={styles.barButton}>Back</Text> */}
         </TouchableOpacity>

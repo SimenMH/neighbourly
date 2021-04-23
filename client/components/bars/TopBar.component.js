@@ -4,13 +4,13 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import logo from '../../assets/logo.png';
 import settingsIcon from '../../assets/button-icons/settings-icon.png';
 
-export default function TopBar (props) {
+export default function TopBar ({ navigateSettings }) {
   return (
     <View style={styles.topBar}>
       <View style={styles.container}>
         <Image style={styles.logo} source={logo} />
         <Text style={styles.title}>Neighbourly</Text>
-        <TouchableOpacity style={styles.settingsBtn} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.settingsBtn} activeOpacity={0.8} onPress={navigateSettings}>
           <Image source={settingsIcon} style={{height: '100%', width: '100%'}}/>
         </TouchableOpacity>
       </View>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ImageBackground } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import PostList from '../../components/post-list/PostList.component';
 import TopBar from '../../components/bars/TopBar.component';
@@ -15,20 +16,35 @@ export default function Main ({navigation}) {
 
   const goTo = (newScreen) => {
     setScreen(newScreen);
+  };
+
+  const checkForUser = async () => {
+    const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
+    if (!hasLocation) {
+      navigation.replace('LocationPicker')
+    }
   }
+
+  useEffect(() => {
+    checkForUser();
+  }, [])
 
   useEffect(() => {
     setPosts(POSTS[screen]);
   }, [screen]);
-
+  
   const navigateNewPost = () => {
-    navigation.navigate('NewPost', {type: screen, setPosts: () => {setPosts(POSTS[screen])}})
-  }
+    navigation.navigate('NewPost', {type: screen, refreshPosts: () => {setPosts(POSTS[screen])}})
+  };
+
+  const navigateSettings = () => {
+    navigation.replace('LocationPicker');
+  };
 
 
   return (
     <View style={styles.container}>
-      <TopBar />
+      <TopBar navigateSettings={navigateSettings} />
       <View>
         <ImageBackground source={corkBackground} style={styles.background} />
         <PostList posts={posts}/>

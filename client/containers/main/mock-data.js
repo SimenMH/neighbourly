@@ -1,8 +1,10 @@
 // POST DATA SHOULD LOOK LIKE THIS
+
+
 // id: String,
 // content: String,
 // timestamp: String,
-// location: String,
+// location: String, --latitude and longitude
 // color: String,
 
 // Character limit for posts should be 650. Linebreak should equal 24 characters
