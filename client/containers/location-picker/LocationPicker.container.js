@@ -82,8 +82,12 @@ export default function LocationPicker (props) {
       )}
       {!isFetching && (
         <View>
-          <Button title="Choose location on map" color={"blue"} onPress={navigateToMapScreen}/>
-          <Button title="Use this location" color={"blue"} onPress={confirmLocation}/>
+          <View style={{ margin: 5 }}>
+            <Button title="Choose location on map" color={"blue"} onPress={navigateToMapScreen} />
+          </View>
+          <View style={{ margin: 5 }}>
+            <Button title="Use this location" color={"blue"} onPress={confirmLocation}/>
+          </View>
         </View>
       )}
     </View>

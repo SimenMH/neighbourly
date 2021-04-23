@@ -35,7 +35,7 @@ export default function Main ({navigation}) {
 
   const navigateNewPost = () => navigation.navigate('NewPost', {type: screen, refreshPosts: () => refreshPosts()});
 
-  const navigateSettings = () => navigation.replace('LocationPicker');
+  const navigateSettings = () => navigation.navigate('LocationPicker');
 
   useEffect(() => {
     checkForUser();

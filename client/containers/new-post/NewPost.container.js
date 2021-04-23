@@ -25,10 +25,9 @@ export default function NewPost ({navigation, route}) {
         content: text,
         latitude: position.latitude,
         longitude: position.longitude,
-        color: 3 // make this random
+        color: 3 // TODO: make this random
       }
-      const createdPost = await createPost(post)
-      console.log(createdPost);
+      await createPost(post)
       setText('');
       navigation.goBack();
       refreshPosts();
