@@ -55,14 +55,19 @@ export default function LocationPicker (props) {
   }
 
   const navigateToMapScreen = () => {
-    props.navigation.navigate('MapScreen', { coordinates: pickedLocation, onConfirm: coords => setPickedLocation(coords)});
+    props.navigation.navigate(
+      'MapScreen',
+      {
+        coordinates: pickedLocation,
+        onConfirm: coords => setPickedLocation(coords)
+      }
+    );
   };
 
   const confirmLocation = async () => {
     await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation))
     props.navigation.replace('Main');
   };
-
 
   useEffect(() => {
     getLocationHandler();

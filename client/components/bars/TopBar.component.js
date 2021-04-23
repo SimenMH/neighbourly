@@ -18,7 +18,6 @@ export default function TopBar ({ navigateSettings }) {
   )
 }
 
-
 const styles = StyleSheet.create({
   topBar: {
     height: 100,

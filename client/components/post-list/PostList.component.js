@@ -8,7 +8,7 @@ export default function PostList (props) {
 
   const onRefresh = () => {
     setRefreshing(true);
-    setTimeout(() => {setRefreshing(false)}, 2000)
+    props.handleRefresh(() => setRefreshing(false));
   };
 
   return (
@@ -16,7 +16,7 @@ export default function PostList (props) {
       <FlatList
         data={props.posts}
         renderItem={Post}
-        keyExtractor={post => post.id}
+        keyExtractor={post => post._id}
         style={{minWidth: '100%'}}
         contentContainerStyle={{ paddingBottom: 100}}
         showsVerticalScrollIndicator={false}

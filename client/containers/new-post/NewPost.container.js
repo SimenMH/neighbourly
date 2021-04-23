@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { addPost } from '../main/mock-data';
+import { createPost } from '../../services/ApiService.service';
 
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
 
@@ -15,11 +16,19 @@ export default function NewPost ({navigation, route}) {
     setLineBreaks(lb.length-1);
   }, [text])
 
-  const postIt = () => {
-    // Replace this with api service
+  const postIt = async () => {
     const {type, refreshPosts} = route.params
     if (text) {
-      addPost(text, type);
+      let position = await AsyncStorage.getItem('@neighbourly_location')
+      position = JSON.parse(position);
+      const post = {
+        content: text,
+        latitude: position.latitude,
+        longitude: position.longitude,
+        color: 3 // make this random
+      }
+      const createdPost = await createPost(post)
+      console.log(createdPost);
       setText('');
       navigation.goBack();
       refreshPosts();
@@ -51,7 +60,6 @@ export default function NewPost ({navigation, route}) {
   )
 }
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#428a30',
@@ -82,8 +90,6 @@ const styles = StyleSheet.create({
     maxHeight: '70%'
   },
   input: {
-    // marginHorizontal: 20,
-    // marginTop: 10,
     color: '#FFF0DA',
     textDecorationLine: 'underline',
     fontSize: 22,
