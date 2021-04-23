@@ -23,4 +23,4 @@ async function deleteNotice (ctx) {
   }
 }
 
-module.exports = { getNotices, createNotice, deleteNotice }
+module.exports = { createNotice, deleteNotice }

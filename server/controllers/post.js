@@ -23,4 +23,4 @@ async function deletePost (ctx) {
   }
 }
 
-module.exports = { getPosts, createPost, deletePost }
+module.exports = { createPost, deletePost }
