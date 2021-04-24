@@ -1,5 +1,5 @@
 // Compares two latitude and longitude coordinates and returns the distance in meters
-function distanceInMeters(pos1, pos2) {
+function distanceInMeters (pos1, pos2) {
   var p = 0.017453292519943295;
   var c = Math.cos;
   var a = 0.5 - c((pos2.lat - pos1.lat) * p)/2 + 

@@ -13,18 +13,18 @@ export default function LocationPicker (props) {
   const [hasLocation, setHasLocation] = useState(false);
 
   const verifyPermissions = async () => {
-    setFetching(true)
+    setFetching(true);
     const result = await Location.requestForegroundPermissionsAsync();;
     if (result.status !== 'granted') {
       Alert.alert(
         'Insufficient permissions!',
         'You need to grant location permissions to use this app.',
         [{ text: 'Okay' }]
-      )
+      );
       return false;
     }
     return true;
-  }
+  };
 
   const getCurrentLocation = async () => {
     const hasPermission = await verifyPermissions();
@@ -36,27 +36,27 @@ export default function LocationPicker (props) {
       setPickedLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude
-      })
+      });
     } catch (err) {
       Alert.alert(
         'Could not fetch location!',
         'Please try again later or pick a location on the map.',
         [{ text: 'Okay' }]
-      )
+      );
     }
-    setFetching(false)
+    setFetching(false);
   };
 
   const getLocationHandler = async () => {
-    const curSelectedLocation = await AsyncStorage.getItem('@neighbourly_location')
+    const curSelectedLocation = await AsyncStorage.getItem('@neighbourly_location');
     if (curSelectedLocation) {
       setHasLocation(true);
       setPickedLocation(JSON.parse(curSelectedLocation));
-      setFetching(false)
+      setFetching(false);
     } else {
       getCurrentLocation();
     }
-  }
+  };
 
   const navigateToMapScreen = () => {
     props.navigation.navigate(
@@ -69,7 +69,7 @@ export default function LocationPicker (props) {
   };
 
   const confirmLocation = async () => {
-    await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation))
+    await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
     props.navigation.reset(({index: 0, routes: [{name: 'Main'}]}));
   };
 
@@ -110,10 +110,10 @@ export default function LocationPicker (props) {
         
         <View style={styles.mapButtons}>
           <View style={{ margin: 5 }}>
-            <Button style={styles.mapButton} title="Pick location on map" color={"#317851"} onPress={navigateToMapScreen} disabled={isFetching} />
+            <Button style={styles.mapButton} title="Pick location on map" color={'#317851'} onPress={navigateToMapScreen} disabled={isFetching} />
           </View>
           <View style={{ margin: 5 }}>
-            <Button style={styles.mapButton} title="Find my location" color={"#317851"} onPress={getCurrentLocation} disabled={isFetching} />
+            <Button style={styles.mapButton} title="Find my location" color={'#317851'} onPress={getCurrentLocation} disabled={isFetching} />
           </View>
         </View>
       </View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#489634',
     maxHeight: 85,
     width: '100%',
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 3,
     paddingHorizontal: 15,
     paddingTop: 24,

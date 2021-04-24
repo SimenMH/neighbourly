@@ -16,15 +16,15 @@ export default function Post (props) {
 
   const formatTime = () => {
     const time = moment(post.createdAt).fromNow();
-    return time
-  }
+    return time;
+  };
   
   const toggleInterest = () => {
-    interested ? setInterest(interest-1) : setInterest(interest+1)
-    setInterested(!interested)
-  }
+    interested ? setInterest(interest-1) : setInterest(interest+1);
+    setInterested(!interested);
+  };
 
-  formatTime()
+  formatTime();
 
   return (
     <View style={styles.container}>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     minHeight: 115,
 
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 4,
   },
   background: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: 15,
     width: 15,
     borderRadius: 50,
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 3,
   },
   noticePin: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     backgroundColor: '#66bb00',
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 1,
     borderRadius: 5,
     marginLeft: 5

@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import logo from '../../assets/logo.png';
 
 import settingsIcon from '../../assets/button-icons/settings-icon.png';
-import locationIcon from '../../assets/button-icons/location-icon-alt.png' // Using this instead temporarily
+import locationIcon from '../../assets/button-icons/location-icon-alt.png'; // Using this instead temporarily
 
 export default function TopBar ({ navigateSettings }) {
   return (
@@ -17,7 +17,7 @@ export default function TopBar ({ navigateSettings }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: '100%',
     backgroundColor: '#489634',
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 8,
   },
   container: {
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   }
-})
+});

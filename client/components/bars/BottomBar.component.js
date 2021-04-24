@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 50,
 
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 8,
   },
   addButton: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: '100%',
     width: 4,
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 2,
   },
   plusHor: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 4,
     width: 18,
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 2,
   },
 });

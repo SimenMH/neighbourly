@@ -17,11 +17,11 @@ export default function Main ({navigation}) {
   const checkForUser = async () => {
     const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
     if (!hasLocation) {
-      navigation.replace('LocationPicker')
+      navigation.replace('LocationPicker');
     } else {
-      refreshPosts()
+      refreshPosts();
     }
-  }
+  };
   
   const refreshPosts = async (cb) => {
     const location = await AsyncStorage.getItem('@neighbourly_location');
@@ -29,7 +29,7 @@ export default function Main ({navigation}) {
     
     if(cb) cb();
     setPosts(newPosts);
-  }
+  };
   
   const goTo = (newScreen) => setScreen(newScreen);
 

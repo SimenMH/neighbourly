@@ -6,20 +6,20 @@ import checkIcon from '../../assets/button-icons/check-icon-alt.png';
 
 export default function MapScreen (props) {
   const coords = props.route.params.coordinates;
-  const [pickedLocation, setPickedLocation] = useState(coords)
+  const [pickedLocation, setPickedLocation] = useState(coords);
   
-  const selectLocationHandler = e => setPickedLocation({...e.nativeEvent.coordinate})
+  const selectLocationHandler = e => setPickedLocation({...e.nativeEvent.coordinate});
   
   const mapRegion = {
     ...coords,
-      longitudeDelta: 0.002,
-      latitudeDelta: 0.002
-  }
+    longitudeDelta: 0.002,
+    latitudeDelta: 0.002
+  };
 
   const confirmHandler = () => {
     props.route.params.onConfirm(pickedLocation);
-    props.navigation.goBack()
-  }
+    props.navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     height: '50%',
     width: '50%'
   },
-})
+});

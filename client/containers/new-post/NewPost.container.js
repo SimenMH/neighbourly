@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#489634',
     maxHeight: 85,
     width: '100%',
-    shadowColor: "#000",
+    shadowColor: '#000',
     elevation: 3,
     paddingHorizontal: 15,
     paddingTop: 24,

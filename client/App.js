@@ -23,18 +23,18 @@ export default function App() {
   const resetApp = async () => {
     await AsyncStorage.removeItem('@neighbourly_location');
     await AsyncStorage.removeItem('@neighbourly_authored');
-  }
+  };
 
   useState(() => {
-    resetApp()
-  }, [])
+    resetApp();
+  }, []);
 
   if (!fontsLoaded) {
     return (
       <View>
         <ActivityIndicator size='large' color='purple' />
       </View>
-    )
+    );
   } else {
     return (
       <NavigationContainer style={styles.container}>
