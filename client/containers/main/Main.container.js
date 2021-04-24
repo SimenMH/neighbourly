@@ -46,7 +46,7 @@ export default function Main ({navigation}) {
       <TopBar navigateSettings={navigateSettings} />
       <View>
         <ImageBackground source={corkBackground} style={styles.background} />
-        <PostList posts={posts[screen]} handleRefresh={(cb) => refreshPosts(cb)}/>
+        <PostList posts={posts[screen]} type={screen} handleRefresh={(cb) => refreshPosts(cb)}/>
       </View>
       <BottomBar screen={screen} navigateNewPost={() => navigateNewPost()} changeScreen={(newScreen) => goTo(newScreen)}/>
     </View>

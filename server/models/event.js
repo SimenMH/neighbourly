@@ -27,7 +27,10 @@ const event = new mongoose.Schema(
       required: false
     },
     eventDate: String,
-    interest: Number
+    interest: {
+      type: Number,
+      default: 0
+    }
   },
   { timestamps: true }
 );
