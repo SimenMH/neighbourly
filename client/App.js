@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { useFonts } from 'expo-font';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFonts } from 'expo-font';
 
 import Main from './containers/main/Main.container';
 import NewPost from './containers/new-post/NewPost.container';
 import LocationPicker from './containers/location-picker/LocationPicker.container';
 import MapScreen from './containers/location-picker/MapScreen';
 
-const Stack = createStackNavigator();
 
 console.disableYellowBox = true;
+const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
     'PoetsenOne': require('./assets/fonts/Poetsenone.ttf'),
   });
 
-  const resetApp = async () => {
+  const resetStorage = async () => {
     await AsyncStorage.removeItem('@neighbourly_location');
     await AsyncStorage.removeItem('@neighbourly_authored');
   };
 
   useState(() => {
-    resetApp();
+    resetStorage(); // Temporary
   }, []);
 
   if (!fontsLoaded) {
@@ -38,13 +40,12 @@ export default function App() {
   } else {
     return (
       <NavigationContainer style={styles.container}>
-        {/* screenOptions={{ animationEnabled: false }} */}
-        <Stack.Navigator> 
-          <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
-          <Stack.Screen name="NewPost" component={NewPost} options={{ headerShown: false }} />
-          <Stack.Screen name="Settings" component={LocationPicker} options={{ headerShown: false }} />
-          <Stack.Screen name="LocationPicker" component={LocationPicker} options={{ headerShown: false }} />
-          <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false}} />
+        <Stack.Navigator screenOptions={{ headerShown: false }}> 
+          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen name="NewPost" component={NewPost} />
+          <Stack.Screen name="Settings" component={LocationPicker} />
+          <Stack.Screen name="LocationPicker" component={LocationPicker} />
+          <Stack.Screen name="MapScreen" component={MapScreen} />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>

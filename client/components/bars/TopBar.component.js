@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 
 import logo from '../../assets/logo.png';
 
-import settingsIcon from '../../assets/button-icons/settings-icon.png';
+// import settingsIcon from '../../assets/button-icons/settings-icon.png';
 import locationIcon from '../../assets/button-icons/location-icon-alt.png'; // Using this instead temporarily
 
 export default function TopBar ({ navigateSettings }) {
@@ -12,7 +12,11 @@ export default function TopBar ({ navigateSettings }) {
       <View style={styles.container}>
         <Image style={styles.logo} source={logo} />
         <Text style={styles.title}>Neighbourly</Text>
-        <TouchableOpacity style={styles.settingsBtn} activeOpacity={0.8} onPress={navigateSettings}>
+        <TouchableOpacity
+          style={styles.settingsBtn}
+          activeOpacity={0.8}
+          onPress={navigateSettings}
+        >
           <Image source={locationIcon} style={{height: '100%', width: '100%'}}/>
         </TouchableOpacity>
       </View>

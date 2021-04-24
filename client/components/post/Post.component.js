@@ -40,7 +40,10 @@ export default function Post (props) {
         <View>
           <View style={styles.topContainer}>
             <Text style={styles.timestamp}>{formatTime()}</Text>
-            <TouchableOpacity style={{padding: 5}} onPress={() => console.log('Post Settings')}>
+            <TouchableOpacity
+              style={{padding: 5}}
+              onPress={() => console.log('Post Settings')}
+            >
               <View style={styles.settings}>
                 <View style={styles.settingsDot}></View>
                 <View style={styles.settingsDot}></View>
@@ -50,11 +53,11 @@ export default function Post (props) {
           </View>
           <Text style={styles.content}>{post.content}</Text>
         </View>
-        {(post.identifier) ? (
-          <Text style={styles.identifier}>-{post.identifier}</Text>
-        ) : (
-          null
-        )}
+        {(post.identifier) ?
+          (<Text style={styles.identifier}>-{post.identifier}</Text>)
+          : 
+          (null)
+        }
       </View>
       {(props.type === 'event') &&
         <View style={styles.eventInfo}>
@@ -62,7 +65,11 @@ export default function Post (props) {
           <View style={styles.interestContainer}>
             <Text style={styles.eventText}>{interest} people are interested</Text>
             <View>
-              <TouchableOpacity style={styles.interestButton} activeOpacity={0.4} onPress={toggleInterest}>
+              <TouchableOpacity
+                style={styles.interestButton}
+                activeOpacity={0.4}
+                onPress={toggleInterest}
+              >
                 <View style={styles.iconContainer}>
                   <Image source={interested ? checkIcon : plusIcon } style={styles.buttonIcon}/>
                 </View>

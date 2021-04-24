@@ -80,15 +80,29 @@ export default function NewPost ({navigation, route}) {
       </ScrollView>
       {!editIdentity ? (
         <View style={styles.optionsContainer}>
-          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setEditIdentity(true)}>
+          <TouchableOpacity
+            style={styles.optionsButton}
+            activeOpacity={0.8}
+            onPress={() => setEditIdentity(true)}
+          >
             <View style={styles.iconContainer}>
               <Image source={identifierIcon} style={styles.buttonIcons}/>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setAllowMessages(!allowMessages)}>
+          <TouchableOpacity
+            style={styles.optionsButton}
+            onPress={() => setAllowMessages(!allowMessages)}
+            activeOpacity={0.8}
+          >
             <View style={styles.iconContainer}>
-              <Image source={chatIcon} style={{...styles.buttonIcons, opacity: (allowMessages ? 0.8 : 0.2)}}/>
+              <Image
+                source={chatIcon}
+                style={{
+                  ...styles.buttonIcons,
+                  opacity: (allowMessages ? 0.8 : 0.2)
+                }}
+              />
             </View>
           </TouchableOpacity>
 
@@ -108,7 +122,11 @@ export default function NewPost ({navigation, route}) {
         </View>
       ) : (
         <View style={styles.optionsContainer}>
-          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setEditIdentity(false)}>
+          <TouchableOpacity
+            style={styles.optionsButton}
+            onPress={() => setEditIdentity(false)}
+            activeOpacity={0.8}
+          >
             <View style={styles.iconContainer}>
               <Image source={checkIcon} style={{...styles.buttonIcons, opacity: 0.6}} />
             </View>

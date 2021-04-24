@@ -20,14 +20,26 @@ export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
               onPress={() => goTo('home')}
               activeOpacity={0.8}
             >
-              <Image source={homeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: screen === 'home' ? 1 : 0.5}}/>
+              <Image
+                source={homeIcon}
+                style={{
+                  ...styles.iconButtonImage,
+                  opacity: screen === 'home' ? 1 : 0.5
+                }}
+              />
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.iconButton, { marginRight: 30 }]}
               onPress={() => goTo('notice')}
               activeOpacity={0.8}
             >
-              <Image source={noticeIcon} style={{flex: 1, height: '100%', width: '100%', opacity: screen === 'notice' ? 1 : 0.5}}/>
+              <Image
+                source={noticeIcon}
+                style={{
+                  ...styles.iconButtonImage,
+                  opacity: screen === 'notice' ? 1 : 0.5
+                }}
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.innerButtonContainer}>
@@ -36,14 +48,26 @@ export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
               onPress={() => goTo('event')}
               activeOpacity={0.8}
             >
-              <Image source={eventIcon} style={{flex: 1, height: '100%', width: '100%', opacity: screen === 'event' ? 1 : 0.5}}/>
+              <Image
+                source={eventIcon}
+                style={{
+                  ...styles.iconButtonImage,
+                  opacity: screen === 'event' ? 1 : 0.5
+                }}
+              />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconButton}
               onPress={() => goTo('favor')}
               activeOpacity={0.8}
             >
-              <Image source={favorIcon} style={{flex: 1, height: '100%', width: '100%', opacity: screen === 'favor' ? 1 : 0.5}}/>
+              <Image
+                source={favorIcon}
+                style={{
+                  ...styles.iconButtonImage,
+                  opacity: screen === 'favor' ? 1 : 0.5
+                }}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -97,6 +121,11 @@ const styles = StyleSheet.create({
   iconButton: {
     height: 40,
     width: 40,
+  },
+  iconButtonImage: {
+    flex: 1,
+    height: '100%',
+    width: '100%'
   },
   addButtonBack: {
     flex: 1,

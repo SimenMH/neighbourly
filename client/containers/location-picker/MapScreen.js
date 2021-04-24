@@ -28,9 +28,15 @@ export default function MapScreen (props) {
         onPress={selectLocationHandler}
         initialRegion={mapRegion}
       >
-        {pickedLocation && <Marker title='Picked Location' coordinate={pickedLocation}></Marker>}
+        {pickedLocation &&
+          <Marker title='Picked Location' coordinate={pickedLocation}></Marker>
+        }
       </MapView>
-      <TouchableOpacity style={styles.confirm} activeOpacity={0.8} onPress={() => confirmHandler()}>
+      <TouchableOpacity
+        style={styles.confirm}
+        activeOpacity={0.8}
+        onPress={() => confirmHandler()}
+      >
         <View style={styles.iconContainer}>
           <Image source={checkIcon} style={styles.buttonIcon} />
         </View>

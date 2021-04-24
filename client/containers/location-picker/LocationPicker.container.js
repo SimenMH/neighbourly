@@ -81,11 +81,18 @@ export default function LocationPicker (props) {
     <View style={styles.container}>
       
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={confirmLocation} activeOpacity={0.5} disabled={isFetching}>
+        <TouchableOpacity
+          onPress={confirmLocation}
+          activeOpacity={0.5}
+          disabled={isFetching}
+        >
           <Text style={styles.barButton}>Confirm</Text>
         </TouchableOpacity>
         {hasLocation && 
-          <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
+          <TouchableOpacity
+            onPress={() => props.navigation.goBack()}
+            activeOpacity={0.5}
+          >
             <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
           </TouchableOpacity>
         }
@@ -110,10 +117,22 @@ export default function LocationPicker (props) {
         
         <View style={styles.mapButtons}>
           <View style={{ margin: 5 }}>
-            <Button style={styles.mapButton} title="Pick location on map" color={'#317851'} onPress={navigateToMapScreen} disabled={isFetching} />
+            <Button
+              title="Pick location on map"
+              style={styles.mapButton}
+              color={'#317851'}
+              onPress={navigateToMapScreen}
+              disabled={isFetching}
+            />
           </View>
           <View style={{ margin: 5 }}>
-            <Button style={styles.mapButton} title="Find my location" color={'#317851'} onPress={getCurrentLocation} disabled={isFetching} />
+            <Button
+              title="Find my location"
+              style={styles.mapButton}
+              color={'#317851'}
+              onPress={getCurrentLocation}
+              disabled={isFetching}
+            />
           </View>
         </View>
       </View>
