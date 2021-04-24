@@ -66,6 +66,7 @@ export default function LocationPicker (props) {
 
   const confirmLocation = async () => {
     await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation))
+    // if it isn't first time setup, use goBack() instead
     props.navigation.replace('Main');
   };
 

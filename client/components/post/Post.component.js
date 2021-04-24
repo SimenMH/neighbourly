@@ -7,9 +7,7 @@ import paperBackground from '../../assets/paper-texture01.jpg';
 export default function Post (props) {
   const post = props.item;
   const pinColors = ['#FF9797', '#97B4FF', '#DEEE7F', '#D8D8D8', '#85DD84'];
-  // const pinColor = pinColors[post.color];
-  // Move this logic into create post and save the color in post data
-  const pinColor = pinColors[Math.floor(Math.random() * (pinColors.length))]
+  const pinColor = pinColors[post.color];
 
   const formatTime = () => {
     const time = moment(post.createdAt).fromNow();

@@ -5,11 +5,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createPost } from '../../services/ApiService.service';
 
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
+import identifierIcon from '../../assets/button-icons/identifier-icon.png';
+import chatIcon from '../../assets/button-icons/chat-icon.png';
+import timerIcon from '../../assets/button-icons/timer-icon.png';
+import calendarIcon from '../../assets/button-icons/calendar-icon.png';
+import checkIcon from '../../assets/button-icons/check-icon.png';
 
 export default function NewPost ({navigation, route}) {
   const { type } = route.params;
-  const [text, setText] = useState('')
-  const [lineBreaks, setLineBreaks] = useState(0)
+  const [text, setText] = useState('');
+  const [lineBreaks, setLineBreaks] = useState(0);
+  const [allowMessages, setAllowMessages] = useState(false);
+  const [editIdentity, setEditIdentity] = useState(false);
 
   useEffect(() => {
     // Get the number of linebreaks and update the lineBreaks state
@@ -26,7 +33,7 @@ export default function NewPost ({navigation, route}) {
         content: text,
         latitude: position.latitude,
         longitude: position.longitude,
-        color: 3 // TODO: make this random
+        color: Math.floor(Math.random() * 5) // 5 is the amount of different pin colors
       }
       const newPost = await createPost(post)
 
@@ -53,17 +60,64 @@ export default function NewPost ({navigation, route}) {
       </View>
       <ScrollView style={styles.inputView}>
         <TextInput
+          style={styles.input}
           multiline
           scrollEnabled={true}
           maxLength={345 - (lineBreaks * 23)} // For each linebreak, decrease the max length by 23
-          style={styles.input}
           onChangeText={setText}
           placeholder={'Share your thoughts and experiences with the neighbours around you'}
         />
       </ScrollView>
+      {!editIdentity ? (
+        <View style={styles.optionsContainer}>
+          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setEditIdentity(true)}>
+            <View style={styles.iconContainer}>
+              <Image source={identifierIcon} style={styles.buttonIcons}/>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setAllowMessages(!allowMessages)}>
+            <View style={styles.iconContainer}>
+              <Image source={chatIcon} style={{...styles.buttonIcons, opacity: (allowMessages ? 0.8 : 0.2)}}/>
+            </View>
+          </TouchableOpacity>
+          {(type === 'event') ? (
+            <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8}>
+              <View style={styles.iconContainer}>
+                <Image source={calendarIcon} style={styles.buttonIcons} />
+              </View>
+            </TouchableOpacity>
+            ) : (
+            <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8}>
+              <View style={styles.iconContainer}>
+                <Image source={timerIcon} style={styles.buttonIcons}/>
+              </View>
+            </TouchableOpacity>
+            )
+          }
+        </View>
+      ) : (
+        <View style={styles.optionsContainer}>
+          <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setEditIdentity(false)}>
+            <View style={styles.iconContainer}>
+              <Image source={checkIcon} style={{...styles.buttonIcons, opacity: 0.6}} />
+            </View>
+          </TouchableOpacity>
+          <View style={styles.identityInputContainer}>
+            <TextInput
+              style={styles.identityInput}
+              maxLength={16}
+              placeholder={'e.g. John, 221B'}
+            />
+          </View>
+        </View>
+        )
+      }
     </View>
   )
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -100,5 +154,41 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlignVertical: 'top',
     height: '100%'
+  },
+  optionsContainer: {
+    flex: 1,
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-end',
+    paddingRight: 5,
+    paddingBottom: 15
+  },
+  optionsButton: {
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    backgroundColor: '#FFF0DA',
+    marginHorizontal: 7,
+  },
+  iconContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonIcons: {
+    height: '60%',
+    width: '60%',
+    opacity: 0.8,
+  },
+  identityInputContainer: {
+    flex: 1,
+    padding: 10,
+    maxWidth: 150,
+    height: 40,
+    borderRadius: 50,
+    backgroundColor: 'white',
+  },
+  identityInput: {
+    fontSize: 15,
+    fontWeight: 'bold',
   }
 })
