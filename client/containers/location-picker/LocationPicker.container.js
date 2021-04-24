@@ -82,7 +82,7 @@ export default function LocationPicker (props) {
     <View style={styles.container}>
       
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={confirmLocation} activeOpacity={0.5}>
+        <TouchableOpacity onPress={confirmLocation} activeOpacity={0.5} disabled={isFetching}>
           <Text style={styles.barButton}>Confirm</Text>
         </TouchableOpacity>
         {hasLocation && 

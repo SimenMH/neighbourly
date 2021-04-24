@@ -37,7 +37,7 @@ export default function NewPost ({navigation, route}) {
         content: text,
         latitude: position.latitude,
         longitude: position.longitude,
-        color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors,
+        color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors
         identifier: identity.trim(),
         allowMessages: allowMessages
       }
