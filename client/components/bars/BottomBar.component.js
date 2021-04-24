@@ -6,8 +6,7 @@ import noticeIcon from '../../assets/button-icons/notice-icon.png';
 import eventIcon from '../../assets/button-icons/event-icon.png';
 import favorIcon from '../../assets/button-icons/favor-icon.png';
 
-export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
-
+export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
   const goTo = screen => changeScreen(screen);
 
   return (
@@ -15,11 +14,7 @@ export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
       <View style={styles.bottomBar}>
         <View style={styles.buttonContainer}>
           <View style={styles.innerButtonContainer}>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={() => goTo('home')}
-              activeOpacity={0.8}
-            >
+            <TouchableOpacity style={styles.iconButton} onPress={() => goTo('home')} activeOpacity={0.8}>
               <Image
                 source={homeIcon}
                 style={{
@@ -56,11 +51,7 @@ export default function BottomBar ({navigateNewPost, changeScreen, screen}) {
                 }}
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.iconButton}
-              onPress={() => goTo('favor')}
-              activeOpacity={0.8}
-            >
+            <TouchableOpacity style={styles.iconButton} onPress={() => goTo('favor')} activeOpacity={0.8}>
               <Image
                 source={favorIcon}
                 style={{
@@ -94,7 +85,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 95,
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   bottomBar: {
     position: 'absolute',
@@ -103,24 +94,24 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#489634',
     borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
+    borderTopStartRadius: 30
   },
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   innerButtonContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 30,
+    marginHorizontal: 30
   },
   iconButton: {
     height: 40,
-    width: 40,
+    width: 40
   },
   iconButtonImage: {
     flex: 1,
@@ -137,7 +128,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
 
     shadowColor: '#000',
-    elevation: 8,
+    elevation: 8
   },
   addButton: {
     flex: 1,
@@ -146,14 +137,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#43A82A',
     minWidth: 62,
     maxHeight: 62,
-    borderRadius: 50,
+    borderRadius: 50
   },
   plusIcon: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     maxHeight: 18,
-    minWidth: 18,
+    minWidth: 18
   },
   plusVer: {
     flex: 1,
@@ -164,7 +155,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: 4,
     shadowColor: '#000',
-    elevation: 2,
+    elevation: 2
   },
   plusHor: {
     backgroundColor: 'white',
@@ -172,6 +163,6 @@ const styles = StyleSheet.create({
     height: 4,
     width: 18,
     shadowColor: '#000',
-    elevation: 2,
-  },
+    elevation: 2
+  }
 });

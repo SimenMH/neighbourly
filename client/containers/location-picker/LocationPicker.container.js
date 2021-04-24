@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image, Button, ActivityIndicator, Alert, TouchableOpacity, Text } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Button,
+  ActivityIndicator,
+  Alert,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 
@@ -7,14 +16,14 @@ import MapPreview from './MapPreview';
 
 import backIcon from '../../assets/button-icons/back-icon.png';
 
-export default function LocationPicker (props) {
+export default function LocationPicker(props) {
   const [isFetching, setFetching] = useState(true);
   const [pickedLocation, setPickedLocation] = useState();
   const [hasLocation, setHasLocation] = useState(false);
 
   const verifyPermissions = async () => {
     setFetching(true);
-    const result = await Location.requestForegroundPermissionsAsync();;
+    const result = await Location.requestForegroundPermissionsAsync();
     if (result.status !== 'granted') {
       Alert.alert(
         'Insufficient permissions!',
@@ -59,66 +68,57 @@ export default function LocationPicker (props) {
   };
 
   const navigateToMapScreen = () => {
-    props.navigation.navigate(
-      'MapScreen',
-      {
-        coordinates: pickedLocation,
-        onConfirm: coords => setPickedLocation(coords)
-      }
-    );
+    props.navigation.navigate('MapScreen', {
+      coordinates: pickedLocation,
+      onConfirm: coords => setPickedLocation(coords)
+    });
   };
 
   const confirmLocation = async () => {
     await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
-    props.navigation.reset(({index: 0, routes: [{name: 'Main'}]}));
+    props.navigation.reset({ index: 0, routes: [{ name: 'Main' }] });
   };
 
   useEffect(() => {
     getLocationHandler();
-  },[]);
-  
+  }, []);
+
   return (
     <View style={styles.container}>
-      
       <View style={styles.topBar}>
-        <TouchableOpacity
-          onPress={confirmLocation}
-          activeOpacity={0.5}
-          disabled={isFetching}
-        >
+        <TouchableOpacity onPress={confirmLocation} activeOpacity={0.5} disabled={isFetching}>
           <Text style={styles.barButton}>Confirm</Text>
         </TouchableOpacity>
-        {hasLocation && 
-          <TouchableOpacity
-            onPress={() => props.navigation.goBack()}
-            activeOpacity={0.5}
-          >
-            <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
+        {hasLocation && (
+          <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
+            <Image source={backIcon} style={{ width: 40, height: 40 }} />
           </TouchableOpacity>
-        }
+        )}
       </View>
 
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Neighbourly</Text>
         <Text style={styles.contentText}>
-          Before you can start using the app, please select your location!
-          You will then start seeing posts from neighbours around you!
+          Before you can start using the app, please select your location! You will then start
+          seeing posts from neighbours around you!
         </Text>
 
         <View style={styles.previewContainer}>
           {isFetching ? (
-            <ActivityIndicator size="large" color="green" />
+            <ActivityIndicator size='large' color='green' />
           ) : (
             <MapPreview location={pickedLocation} />
           )}
         </View>
 
-        <Text style={styles.contentTextWarning}>You can only change your location once every 30 days!</Text>
-        
+        <Text style={styles.contentTextWarning}>
+          You can only change your location once every 30 days!
+        </Text>
+
         <View style={styles.mapButtons}>
           <View style={{ margin: 5 }}>
             <Button
-              title="Pick location on map"
+              title='Pick location on map'
               style={styles.mapButton}
               color={'#317851'}
               onPress={navigateToMapScreen}
@@ -127,7 +127,7 @@ export default function LocationPicker (props) {
           </View>
           <View style={{ margin: 5 }}>
             <Button
-              title="Find my location"
+              title='Find my location'
               style={styles.mapButton}
               color={'#317851'}
               onPress={getCurrentLocation}
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#428a30',
     height: '100%',
-    width: '100%',
+    width: '100%'
   },
   topBar: {
     flex: 1,
@@ -157,12 +157,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     elevation: 3,
     paddingHorizontal: 15,
-    paddingTop: 24,
+    paddingTop: 24
   },
   barButton: {
     color: '#FFF0DA',
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   contentContainer: {
     flex: 1,
@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: -5,
     textShadowColor: 'rgba(0, 0, 0, 0.6)',
-    textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 5,
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5
   },
   contentTextWarning: {
     color: 'black',
@@ -194,10 +194,10 @@ const styles = StyleSheet.create({
     fontFamily: 'PoetsenOne',
     fontSize: 36,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 5,
     color: '#FFF0DA',
-    marginBottom: 30,
+    marginBottom: 30
   },
   // logo: {
   //   height: 50,
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     elevation: 2,
     overflow: 'hidden',
-    borderRadius: 10,
+    borderRadius: 10
   },
   mapButtons: {
     width: 225

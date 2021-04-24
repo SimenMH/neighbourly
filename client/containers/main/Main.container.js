@@ -10,7 +10,7 @@ import BottomBar from '../../components/bars/BottomBar.component';
 
 import corkBackground from '../../assets/cork-texture01.jpg';
 
-export default function Main ({navigation}) {
+export default function Main({ navigation }) {
   const [screen, setScreen] = useState('home');
   const [posts, setPosts] = useState([]); //POSTS.home
 
@@ -22,18 +22,19 @@ export default function Main ({navigation}) {
       refreshPosts();
     }
   };
-  
-  const refreshPosts = async (cb) => {
+
+  const refreshPosts = async cb => {
     const location = await AsyncStorage.getItem('@neighbourly_location');
     const newPosts = await getAll(JSON.parse(location));
-    
-    if(cb) cb();
+
+    if (cb) cb();
     setPosts(newPosts);
   };
-  
-  const goTo = (newScreen) => setScreen(newScreen);
 
-  const navigateNewPost = () => navigation.navigate('NewPost', {type: screen, refreshPosts: () => refreshPosts()});
+  const goTo = newScreen => setScreen(newScreen);
+
+  const navigateNewPost = () =>
+    navigation.navigate('NewPost', { type: screen, refreshPosts: () => refreshPosts() });
 
   const navigateSettings = () => navigation.navigate('LocationPicker');
 
@@ -46,16 +47,13 @@ export default function Main ({navigation}) {
       <TopBar navigateSettings={navigateSettings} />
       <View>
         <ImageBackground source={corkBackground} style={styles.background} />
-        <PostList
-          posts={posts[screen]}
-          type={screen}
-          handleRefresh={(cb) => refreshPosts(cb)}
-        />
+        <PostList posts={posts[screen]} type={screen} handleRefresh={cb => refreshPosts(cb)} />
       </View>
       <BottomBar
         screen={screen}
         navigateNewPost={() => navigateNewPost()}
-        changeScreen={(newScreen) => goTo(newScreen)}/>
+        changeScreen={newScreen => goTo(newScreen)}
+      />
     </View>
   );
 }
@@ -72,6 +70,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     width: '100%',
-    opacity: 0.1,
-  },
+    opacity: 0.1
+  }
 });

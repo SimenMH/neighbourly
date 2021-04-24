@@ -31,6 +31,6 @@ const favor = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Favor = mongoose.model('favor', favor)
+const Favor = mongoose.model('favor', favor);
 
 module.exports = Favor;

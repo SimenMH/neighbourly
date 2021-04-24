@@ -4,12 +4,12 @@ import MapView, { Marker } from 'react-native-maps';
 
 import checkIcon from '../../assets/button-icons/check-icon-alt.png';
 
-export default function MapScreen (props) {
+export default function MapScreen(props) {
   const coords = props.route.params.coordinates;
   const [pickedLocation, setPickedLocation] = useState(coords);
-  
-  const selectLocationHandler = e => setPickedLocation({...e.nativeEvent.coordinate});
-  
+
+  const selectLocationHandler = e => setPickedLocation({ ...e.nativeEvent.coordinate });
+
   const mapRegion = {
     ...coords,
     longitudeDelta: 0.002,
@@ -23,20 +23,10 @@ export default function MapScreen (props) {
 
   return (
     <View style={styles.container}>
-      <MapView
-        style={{flex: 1}}
-        onPress={selectLocationHandler}
-        initialRegion={mapRegion}
-      >
-        {pickedLocation &&
-          <Marker title='Picked Location' coordinate={pickedLocation}></Marker>
-        }
+      <MapView style={{ flex: 1 }} onPress={selectLocationHandler} initialRegion={mapRegion}>
+        {pickedLocation && <Marker title='Picked Location' coordinate={pickedLocation}></Marker>}
       </MapView>
-      <TouchableOpacity
-        style={styles.confirm}
-        activeOpacity={0.8}
-        onPress={() => confirmHandler()}
-      >
+      <TouchableOpacity style={styles.confirm} activeOpacity={0.8} onPress={() => confirmHandler()}>
         <View style={styles.iconContainer}>
           <Image source={checkIcon} style={styles.buttonIcon} />
         </View>
@@ -57,7 +47,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     backgroundColor: '#215AF3',
-    borderRadius: 50,
+    borderRadius: 50
   },
   iconContainer: {
     flex: 1,
@@ -67,5 +57,5 @@ const styles = StyleSheet.create({
   buttonIcon: {
     height: '50%',
     width: '50%'
-  },
+  }
 });

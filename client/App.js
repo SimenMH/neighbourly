@@ -13,13 +13,12 @@ import NewPost from './containers/new-post/NewPost.container';
 import LocationPicker from './containers/location-picker/LocationPicker.container';
 import MapScreen from './containers/location-picker/MapScreen';
 
-
 console.disableYellowBox = true;
 const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'PoetsenOne': require('./assets/fonts/Poetsenone.ttf'),
+    PoetsenOne: require('./assets/fonts/Poetsenone.ttf')
   });
 
   const resetStorage = async () => {
@@ -40,14 +39,14 @@ export default function App() {
   } else {
     return (
       <NavigationContainer style={styles.container}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}> 
-          <Stack.Screen name="Main" component={Main} />
-          <Stack.Screen name="NewPost" component={NewPost} />
-          <Stack.Screen name="Settings" component={LocationPicker} />
-          <Stack.Screen name="LocationPicker" component={LocationPicker} />
-          <Stack.Screen name="MapScreen" component={MapScreen} />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='Main' component={Main} />
+          <Stack.Screen name='NewPost' component={NewPost} />
+          <Stack.Screen name='Settings' component={LocationPicker} />
+          <Stack.Screen name='LocationPicker' component={LocationPicker} />
+          <Stack.Screen name='MapScreen' component={MapScreen} />
         </Stack.Navigator>
-        <StatusBar style="auto" />
+        <StatusBar style='auto' />
       </NavigationContainer>
     );
   }
@@ -59,3 +58,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#BAA47A'
   }
 });
+
+const object = { styles };
