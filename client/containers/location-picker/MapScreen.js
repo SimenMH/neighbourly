@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+
+import checkIcon from '../../assets/button-icons/check-icon-alt.png';
 
 export default function MapScreen (props) {
   const coords = props.route.params.coordinates;
@@ -28,8 +30,10 @@ export default function MapScreen (props) {
       >
         {pickedLocation && <Marker title='Picked Location' coordinate={pickedLocation}></Marker>}
       </MapView>
-      <TouchableOpacity style={styles.confirm} onPress={() => confirmHandler()}>
-        <View></View>
+      <TouchableOpacity style={styles.confirm} activeOpacity={0.8} onPress={() => confirmHandler()}>
+        <View style={styles.iconContainer}>
+          <Image source={checkIcon} style={styles.buttonIcon} />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -42,11 +46,20 @@ const styles = StyleSheet.create({
   },
   confirm: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
-    width: 50,
-    height: 50,
-    backgroundColor: 'blue',
+    bottom: 20,
+    right: 20,
+    width: 60,
+    height: 60,
+    backgroundColor: '#215AF3',
     borderRadius: 50,
-  }
+  },
+  iconContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonIcon: {
+    height: '50%',
+    width: '50%'
+  },
 })

@@ -6,7 +6,6 @@ import { GOOGLE_API_KEY } from '@env';
 export default function MapPreview (props) {
   let mapUrl;
   if (props.location) {
-    // console.log(props.location);
     mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.latitude},${props.location.longitude}&zoom=13&size=400x200&maptype=roadmap&markers=${props.location.latitude},${props.location.longitude}&key=${GOOGLE_API_KEY}`;
   }
 
@@ -17,7 +16,7 @@ export default function MapPreview (props) {
 
 const styles = StyleSheet.create({
   map: {
-    width: 400,
-    height: 200
+    width: '100%',
+    height: '100%'
   }
 })

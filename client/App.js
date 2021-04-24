@@ -14,7 +14,7 @@ import MapScreen from './containers/location-picker/MapScreen';
 const Stack = createStackNavigator();
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     'PoetsenOne': require('./assets/fonts/Poetsenone.ttf'),
   });
 
@@ -30,7 +30,7 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View>
-        <ActivityIndicator size='large' color='green' />
+        <ActivityIndicator size='large' color='purple' />
       </View>
     )
   } else {
