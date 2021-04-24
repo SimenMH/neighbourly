@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 
 import logo from '../../assets/logo.png';
+
 import settingsIcon from '../../assets/button-icons/settings-icon.png';
-import locationIcon from '../../assets/button-icons/location-icon-alt.png'
+import locationIcon from '../../assets/button-icons/location-icon-alt.png' // Using this instead temporarily
 
 export default function TopBar ({ navigateSettings }) {
   return (

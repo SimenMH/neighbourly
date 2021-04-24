@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   iconButton: {
     height: 40,
     width: 40,
-    // opacity: 0.5
   },
   addButtonBack: {
     flex: 1,

@@ -5,7 +5,6 @@ import * as Location from 'expo-location';
 
 import MapPreview from './MapPreview';
 
-import logo from '../../assets/logo.png';
 import backIcon from '../../assets/button-icons/back-icon.png';
 
 export default function LocationPicker (props) {
@@ -96,7 +95,7 @@ export default function LocationPicker (props) {
         <Text style={styles.title}>Neighbourly</Text>
         <Text style={styles.contentText}>
           Before you can start using the app, please select your location!
-          You will then start seeing posts from anyone around you!
+          You will then start seeing posts from neighbours around you!
         </Text>
 
         <View style={styles.previewContainer}>
@@ -193,7 +192,6 @@ const styles = StyleSheet.create({
     maxHeight: 175,
     width: 350,
     marginTop: 35,
-    // marginBottom: 10,
     backgroundColor: '#ededed',
     shadowColor: 'black',
     elevation: 2,

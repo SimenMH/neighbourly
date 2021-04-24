@@ -131,9 +131,6 @@ export default function NewPost ({navigation, route}) {
   )
 }
 
-
-
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#428a30',
