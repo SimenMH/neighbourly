@@ -58,17 +58,17 @@ export default function Post (props) {
       </View>
       {(props.type === 'event') &&
         <View style={styles.eventInfo}>
-            <Text style={styles.eventText}>Date: 16 Feb 2021</Text>
-            <View style={styles.interestContainer}>
-              <Text style={styles.eventText}>{interest} people are interested</Text>
-              <View>
-                <TouchableOpacity style={styles.interestButton} activeOpacity={0.4} onPress={toggleInterest}>
-                  <View style={styles.iconContainer}>
-                    <Image source={interested ? checkIcon : plusIcon } style={styles.buttonIcon}/>
-                  </View>
-                </TouchableOpacity>
-              </View>
+          <Text style={styles.eventText}>Date: 16 Feb 2021</Text>
+          <View style={styles.interestContainer}>
+            <Text style={styles.eventText}>{interest} people are interested</Text>
+            <View>
+              <TouchableOpacity style={styles.interestButton} activeOpacity={0.4} onPress={toggleInterest}>
+                <View style={styles.iconContainer}>
+                  <Image source={interested ? checkIcon : plusIcon } style={styles.buttonIcon}/>
+                </View>
+              </TouchableOpacity>
             </View>
+          </View>
         </View>
       }
     </View>

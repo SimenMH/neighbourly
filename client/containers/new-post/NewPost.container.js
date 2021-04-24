@@ -24,13 +24,13 @@ export default function NewPost ({navigation, route}) {
     // Get the number of linebreaks and update the lineBreaks state
     const lb = text.split('\n');
     setLineBreaks(lb.length-1);
-  }, [text])
+  }, [text]);
 
   const postIt = async () => {
-    const { refreshPosts } = route.params
+    const { refreshPosts } = route.params;
     if (text) {
 
-      let position = await AsyncStorage.getItem('@neighbourly_location')
+      let position = await AsyncStorage.getItem('@neighbourly_location');
       position = JSON.parse(position);
 
       const post = {
@@ -40,20 +40,20 @@ export default function NewPost ({navigation, route}) {
         color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors
         identifier: identity.trim(),
         allowMessages: allowMessages
-      }
+      };
 
-      const newPost = await createPost(post)
+      const newPost = await createPost(post);
 
-      let authored = await AsyncStorage.getItem('@neighbourly_authored')
+      let authored = await AsyncStorage.getItem('@neighbourly_authored');
       if (!authored) authored = '[]';
       authored = JSON.stringify([...(JSON.parse(authored)), newPost._id]);
       await AsyncStorage.setItem('@neighbourly_authored', authored);
-      authored = await AsyncStorage.getItem('@neighbourly_authored')
+      authored = await AsyncStorage.getItem('@neighbourly_authored');
 
       navigation.goBack();
       refreshPosts();
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -98,14 +98,13 @@ export default function NewPost ({navigation, route}) {
                 <Image source={calendarIcon} style={styles.buttonIcons} />
               </View>
             </TouchableOpacity>
-            ) : (
+          ) : (
             <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8}>
               <View style={styles.iconContainer}>
                 <Image source={timerIcon} style={styles.buttonIcons}/>
               </View>
             </TouchableOpacity>
-            )
-          }
+          )}
         </View>
       ) : (
         <View style={styles.optionsContainer}>
@@ -125,10 +124,9 @@ export default function NewPost ({navigation, route}) {
             />
           </View>
         </View>
-        )
-      }
+      )}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -203,4 +201,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   }
-})
+});

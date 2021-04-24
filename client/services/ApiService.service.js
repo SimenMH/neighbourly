@@ -1,12 +1,12 @@
-const baseUrl = 'http://10.0.0.20:3001/api'
+const baseUrl = 'http://10.0.0.20:3001/api';
 
 export const getAll = (pos) => {
-  const posParam = `${pos.latitude},${pos.longitude}`
+  const posParam = `${pos.latitude},${pos.longitude}`;
   return fetch(`${baseUrl}/all/${posParam}`)
     .then(res => res.json())
     .then(data => data)
     .catch(err => console.error(err));
-}
+};
 
 export const createPost = (post) => {
   return fetch(`${baseUrl}/post`, {
@@ -18,7 +18,7 @@ export const createPost = (post) => {
   }).then(res => res.json())
     .then(post => post)
     .catch(err => console.error(err));
-}
+};
 
 export const createNotice = (notice) => {
   return fetch(`${baseUrl}/notice`, {
@@ -30,7 +30,7 @@ export const createNotice = (notice) => {
   }).then(res => res.json())
     .then(notice => notice)
     .catch(err => console.error(err));
-}
+};
 
 export const createEvent = (event) => {
   return fetch(`${baseUrl}/event`, {
@@ -42,7 +42,7 @@ export const createEvent = (event) => {
   }).then(res => res.json())
     .then(event => event)
     .catch(err => console.error(err));
-}
+};
 
 export const createFavor = (favor) => {
   return fetch(`${baseUrl}/favor`, {
@@ -54,4 +54,4 @@ export const createFavor = (favor) => {
   }).then(res => res.json())
     .then(favor => favor)
     .catch(err => console.error(err));
-}
+};

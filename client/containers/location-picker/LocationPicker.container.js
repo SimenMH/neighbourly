@@ -101,9 +101,9 @@ export default function LocationPicker (props) {
         <View style={styles.previewContainer}>
           {isFetching ? (
             <ActivityIndicator size="large" color="green" />
-            ) : (
-              <MapPreview location={pickedLocation} />
-              )}
+          ) : (
+            <MapPreview location={pickedLocation} />
+          )}
         </View>
 
         <Text style={styles.contentTextWarning}>You can only change your location once every 30 days!</Text>
@@ -166,11 +166,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 5
   },
-  logoTitle: {
-    flex: 1,
-    flexDirection: 'row',
-    maxHeight: 60,
-  },
+  // logoTitle: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   maxHeight: 60,
+  // },
   title: {
     fontFamily: 'PoetsenOne',
     fontSize: 36,
@@ -180,11 +180,11 @@ const styles = StyleSheet.create({
     color: '#FFF0DA',
     marginBottom: 30,
   },
-  logo: {
-    height: 50,
-    width: 50,
-    marginRight: 10,
-  },
+  // logo: {
+  //   height: 50,
+  //   width: 50,
+  //   marginRight: 10,
+  // },
   previewContainer: {
     flex: 1,
     justifyContent: 'center',
