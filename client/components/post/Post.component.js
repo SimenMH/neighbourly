@@ -35,6 +35,11 @@ export default function Post (props) {
         </View>
         <Text style={styles.content}>{post.content}</Text>
       </View>
+      {(post.identifier) ? (
+        <Text style={styles.identifier}>-{post.identifier}</Text>
+      ) : (
+        null
+      )}
     </View>
   );
 }
@@ -99,6 +104,12 @@ const styles = StyleSheet.create({
     width: 6,
     marginLeft: 1,
     borderRadius: 50,
-    backgroundColor: 'grey',
+    backgroundColor: '#878787',
   },
+  identifier: {
+    position: 'absolute',
+    bottom: 5,
+    right: 10,
+    color: '#878787'
+  }
 });

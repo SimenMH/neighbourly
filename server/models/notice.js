@@ -24,7 +24,7 @@ const notice = new mongoose.Schema(
     },
     allowMessages: {
       type: Boolean,
-      requied: true
+      required: false
     }
   },
   { timestamps: true }

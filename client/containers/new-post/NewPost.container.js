@@ -12,12 +12,14 @@ import calendarIcon from '../../assets/button-icons/calendar-icon.png';
 import checkIcon from '../../assets/button-icons/check-icon.png';
 
 export default function NewPost ({navigation, route}) {
-  const { type } = route.params;
   const [text, setText] = useState('');
   const [lineBreaks, setLineBreaks] = useState(0);
-  const [allowMessages, setAllowMessages] = useState(false);
+  const [identity, setIdentity] = useState('');
   const [editIdentity, setEditIdentity] = useState(false);
+  const [allowMessages, setAllowMessages] = useState(false);
 
+  const { type } = route.params;
+  
   useEffect(() => {
     // Get the number of linebreaks and update the lineBreaks state
     const lb = text.split('\n');
@@ -27,14 +29,19 @@ export default function NewPost ({navigation, route}) {
   const postIt = async () => {
     const { refreshPosts } = route.params
     if (text) {
+
       let position = await AsyncStorage.getItem('@neighbourly_location')
       position = JSON.parse(position);
+
       const post = {
         content: text,
         latitude: position.latitude,
         longitude: position.longitude,
-        color: Math.floor(Math.random() * 5) // 5 is the amount of different pin colors
+        color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors,
+        identifier: identity,
+        allowMessages: allowMessages
       }
+
       const newPost = await createPost(post)
 
       let authored = await AsyncStorage.getItem('@neighbourly_authored')
@@ -42,7 +49,7 @@ export default function NewPost ({navigation, route}) {
       authored = JSON.stringify([...(JSON.parse(authored)), newPost._id]);
       await AsyncStorage.setItem('@neighbourly_authored', authored);
       authored = await AsyncStorage.getItem('@neighbourly_authored')
-      setText('');
+
       navigation.goBack();
       refreshPosts();
     }
@@ -50,14 +57,17 @@ export default function NewPost ({navigation, route}) {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.5}>
           <Image source={ backIcon } style={{ width: 40, height: 40 }}/>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={postIt} activeOpacity={0.5}>
           <Text style={styles.barButton}>Post</Text>
         </TouchableOpacity>
       </View>
+
       <ScrollView style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -75,11 +85,13 @@ export default function NewPost ({navigation, route}) {
               <Image source={identifierIcon} style={styles.buttonIcons}/>
             </View>
           </TouchableOpacity>
+
           <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8} onPress={() => setAllowMessages(!allowMessages)}>
             <View style={styles.iconContainer}>
               <Image source={chatIcon} style={{...styles.buttonIcons, opacity: (allowMessages ? 0.8 : 0.2)}}/>
             </View>
           </TouchableOpacity>
+
           {(type === 'event') ? (
             <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8}>
               <View style={styles.iconContainer}>
@@ -102,11 +114,14 @@ export default function NewPost ({navigation, route}) {
               <Image source={checkIcon} style={{...styles.buttonIcons, opacity: 0.6}} />
             </View>
           </TouchableOpacity>
+
           <View style={styles.identityInputContainer}>
             <TextInput
               style={styles.identityInput}
               maxLength={16}
               placeholder={'e.g. John, 221B'}
+              onChangeText={(val) => setIdentity(val)}
+              defaultValue={identity}
             />
           </View>
         </View>
