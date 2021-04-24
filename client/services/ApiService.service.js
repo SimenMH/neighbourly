@@ -31,3 +31,27 @@ export const createNotice = (notice) => {
     .then(notice => notice)
     .catch(err => console.error(err));
 }
+
+export const createEvent = (event) => {
+  return fetch(`${baseUrl}/event`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(event),
+  }).then(res => res.json())
+    .then(event => event)
+    .catch(err => console.error(err));
+}
+
+export const createFavor = (favor) => {
+  return fetch(`${baseUrl}/favor`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(favor),
+  }).then(res => res.json())
+    .then(favor => favor)
+    .catch(err => console.error(err));
+}
