@@ -13,6 +13,8 @@ import MapScreen from './containers/location-picker/MapScreen';
 
 const Stack = createStackNavigator();
 
+console.disableYellowBox = true;
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'PoetsenOne': require('./assets/fonts/Poetsenone.ttf'),
