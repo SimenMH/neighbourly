@@ -21,6 +21,10 @@ const post = new mongoose.Schema(
     identifier: {
       type: String,
       required: false
+    },
+    allowMessages: {
+      type: Boolean,
+      required: false
     }
   },
   { timestamps: true }

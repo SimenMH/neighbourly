@@ -22,6 +22,10 @@ const event = new mongoose.Schema(
       type: String,
       required: false
     },
+    allowMessages: {
+      type: Boolean,
+      required: false
+    },
     eventDate: String,
     interest: Number
   },

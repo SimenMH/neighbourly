@@ -21,7 +21,12 @@ const favor = new mongoose.Schema(
     identifier: {
       type: String,
       required: false
-    }
+    },
+    allowMessages: {
+      type: Boolean,
+      required: false
+    },
+    resolved: Boolean
   },
   { timestamps: true }
 );
