@@ -11,6 +11,22 @@ async function createEvent(ctx) {
   }
 }
 
+async function updateEventInterest(ctx) {
+  try {
+    const { id, interest } = ctx.params;
+    const event = await Event.findById(id);
+
+    event.interest += interest === 'true' ? 1 : -1;
+    event.save();
+
+    ctx.body = event;
+    ctx.status = 201;
+  } catch (err) {
+    console.log(err);
+    ctx.status = 500;
+  }
+}
+
 async function deleteEvent(ctx) {
   try {
     const { id } = ctx.params;
@@ -22,4 +38,4 @@ async function deleteEvent(ctx) {
   }
 }
 
-module.exports = { createEvent, deleteEvent };
+module.exports = { createEvent, updateEventInterest, deleteEvent };

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 
 import Post from '../post/Post.component';
 
 export default function PostList(props) {
-  const [refreshing, setRefreshing] = useState(false);
+  let refreshing = false;
 
   const onRefresh = () => {
-    setRefreshing(true);
-    props.handleRefresh(() => setRefreshing(false));
+    refreshing = true;
+    props.handleRefresh();
   };
 
   return (

@@ -50,7 +50,7 @@ export default function NewPost({ navigation, route }) {
 
         let newPost;
         switch (type) {
-          case 'main':
+          case 'home':
             newPost = await createPost(post);
             break;
           case 'notice':

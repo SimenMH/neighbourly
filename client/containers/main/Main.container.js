@@ -27,19 +27,21 @@ export default function Main({ navigation }) {
     }
   };
 
-  const refreshPosts = async cb => {
+  const refreshPosts = async () => {
     try {
       const location = await AsyncStorage.getItem('@neighbourly_location');
       const newPosts = await getAll(JSON.parse(location));
 
-      if (cb) cb();
       setPosts(newPosts);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const goTo = newScreen => setScreen(newScreen);
+  const goTo = newScreen => {
+    setScreen(newScreen);
+    refreshPosts();
+  };
 
   const navigateNewPost = () =>
     navigation.navigate('NewPost', { type: screen, refreshPosts: () => refreshPosts() });

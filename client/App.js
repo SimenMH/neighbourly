@@ -25,6 +25,7 @@ export default function App() {
     try {
       await AsyncStorage.removeItem('@neighbourly_location');
       await AsyncStorage.removeItem('@neighbourly_authored');
+      await AsyncStorage.removeItem('@neighbourly_interested');
     } catch (err) {
       console.error(err);
     }

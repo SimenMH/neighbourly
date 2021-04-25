@@ -1,5 +1,16 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { updateInterest } from '../../services/ApiService.service';
 import moment from 'moment'; // DayJS date-fns
 
 import paperBackground from '../../assets/paper-texture01.jpg';
@@ -12,19 +23,49 @@ export default function Post(props) {
   const pinColors = ['#FF9797', '#97B4FF', '#DEEE7F', '#D8D8D8', '#85DD84'];
   const pinColor = pinColors[post.color];
   const [interested, setInterested] = useState('');
-  const [interest, setInterest] = useState(post.interest);
+  const [fetchingInterest, setFetchingInterest] = useState(true);
 
   const formatTime = () => {
     const time = moment(post.createdAt).fromNow();
     return time;
   };
 
-  const toggleInterest = () => {
-    interested ? setInterest(interest - 1) : setInterest(interest + 1);
+  const toggleInterest = async () => {
+    setFetchingInterest(true);
+    await updateInterest(post._id, !interested);
+
+    let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+    if (interestedEvents) interestedEvents = JSON.parse(interestedEvents);
+    else interestedEvents = [];
+
+    if (!interested) {
+      interestedEvents.push(post._id);
+      post.interest += 1;
+    } else {
+      interestedEvents = interestedEvents.filter(id => id !== post._id);
+      post.interest -= 1;
+    }
+    await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
     setInterested(!interested);
+
+    setFetchingInterest(false);
   };
 
-  formatTime();
+  const fetchInterest = async () => {
+    setFetchingInterest(true);
+    let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+    if (interestedEvents) {
+      interestedEvents = JSON.parse(interestedEvents);
+      if (interestedEvents.includes(post._id)) setInterested(true);
+    }
+    setFetchingInterest(false);
+  };
+
+  useEffect(() => {
+    if (props.type === 'event') {
+      fetchInterest();
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -54,13 +95,22 @@ export default function Post(props) {
       </View>
       {props.type === 'event' && (
         <View style={styles.eventInfo}>
-          <Text style={styles.eventText}>Date: 16 Feb 2021</Text>
+          <Text style={styles.eventText}>Date: {moment(post.eventDate).format('D MMM YYYY')}</Text>
           <View style={styles.interestContainer}>
-            <Text style={styles.eventText}>{interest} people are interested</Text>
+            <Text style={styles.eventText}>{post.interest} people are interested</Text>
             <View>
-              <TouchableOpacity style={styles.interestButton} activeOpacity={0.4} onPress={toggleInterest}>
+              <TouchableOpacity
+                style={styles.interestButton}
+                activeOpacity={0.4}
+                onPress={toggleInterest}
+                disabled={fetchingInterest}
+              >
                 <View style={styles.iconContainer}>
-                  <Image source={interested ? checkIcon : plusIcon} style={styles.buttonIcon} />
+                  {fetchingInterest ? (
+                    <ActivityIndicator size={15} color={'white'} />
+                  ) : (
+                    <Image source={interested ? checkIcon : plusIcon} style={styles.buttonIcon} />
+                  )}
                 </View>
               </TouchableOpacity>
             </View>
@@ -86,7 +136,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    opacity: 0.5
+    opacity: 0.3
   },
   pinContainer: {
     position: 'absolute',

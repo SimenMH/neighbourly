@@ -61,3 +61,14 @@ export const createFavor = favor => {
 };
 
 // Delete && update interest for events
+export const updateInterest = (id, interest) => {
+  return fetch(`${baseUrl}/event/${id}/${interest}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(event => event)
+    .catch(err => console.error(err));
+};
