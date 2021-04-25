@@ -58,5 +58,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#BAA47A'
   }
 });
-
-const object = { styles };
