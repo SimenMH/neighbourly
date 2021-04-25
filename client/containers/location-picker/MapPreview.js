@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
 
-// Create .env file in /client with a google api key
+// Create .env file in /client with a Google API key
 import { GOOGLE_API_KEY } from '@env';
 
 export default function MapPreview(props) {
