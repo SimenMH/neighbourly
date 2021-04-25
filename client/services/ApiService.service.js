@@ -59,3 +59,5 @@ export const createFavor = favor => {
     .then(favor => favor)
     .catch(err => console.error(err));
 };
+
+// Delete && update interest for events

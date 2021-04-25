@@ -22,8 +22,12 @@ export default function App() {
   });
 
   const resetStorage = async () => {
-    await AsyncStorage.removeItem('@neighbourly_location');
-    await AsyncStorage.removeItem('@neighbourly_authored');
+    try {
+      await AsyncStorage.removeItem('@neighbourly_location');
+      await AsyncStorage.removeItem('@neighbourly_authored');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useState(() => {

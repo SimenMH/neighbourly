@@ -25,45 +25,49 @@ export default function LocationPicker(props) {
     setFetching(true);
     const result = await Location.requestForegroundPermissionsAsync();
     if (result.status !== 'granted') {
-      Alert.alert(
-        'Insufficient permissions!',
-        'You need to grant location permissions to use this app.',
-        [{ text: 'Okay' }]
-      );
+      Alert.alert('Insufficient permissions!', 'You need to grant location permissions to use this app.', [
+        { text: 'Okay' }
+      ]);
       return false;
     }
     return true;
   };
 
   const getCurrentLocation = async () => {
-    const hasPermission = await verifyPermissions();
-    if (!hasPermission) {
-      return;
-    }
     try {
-      const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
-      setPickedLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      });
+      const hasPermission = await verifyPermissions();
+      if (!hasPermission) {
+        return;
+      }
+      try {
+        const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
+        setPickedLocation({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        });
+      } catch (err) {
+        Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [
+          { text: 'Okay' }
+        ]);
+      }
+      setFetching(false);
     } catch (err) {
-      Alert.alert(
-        'Could not fetch location!',
-        'Please try again later or pick a location on the map.',
-        [{ text: 'Okay' }]
-      );
+      console.error(err);
     }
-    setFetching(false);
   };
 
   const getLocationHandler = async () => {
-    const curSelectedLocation = await AsyncStorage.getItem('@neighbourly_location');
-    if (curSelectedLocation) {
-      setHasLocation(true);
-      setPickedLocation(JSON.parse(curSelectedLocation));
-      setFetching(false);
-    } else {
-      getCurrentLocation();
+    try {
+      const curSelectedLocation = await AsyncStorage.getItem('@neighbourly_location');
+      if (curSelectedLocation) {
+        setHasLocation(true);
+        setPickedLocation(JSON.parse(curSelectedLocation));
+        setFetching(false);
+      } else {
+        getCurrentLocation();
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -75,8 +79,12 @@ export default function LocationPicker(props) {
   };
 
   const confirmLocation = async () => {
-    await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
-    props.navigation.reset({ index: 0, routes: [{ name: 'Main' }] });
+    try {
+      await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
+      props.navigation.reset({ index: 0, routes: [{ name: 'Main' }] });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -99,8 +107,8 @@ export default function LocationPicker(props) {
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Neighbourly</Text>
         <Text style={styles.contentText}>
-          Before you can start using the app, please select your location! You will then start
-          seeing posts from neighbours around you!
+          Before you can start using the app, please select your location! You will then start seeing posts
+          from neighbours around you!
         </Text>
 
         <View style={styles.previewContainer}>
@@ -111,9 +119,7 @@ export default function LocationPicker(props) {
           )}
         </View>
 
-        <Text style={styles.contentTextWarning}>
-          You can only change your location once every 30 days!
-        </Text>
+        <Text style={styles.contentTextWarning}>You can only change your location once every 30 days!</Text>
 
         <View style={styles.mapButtons}>
           <View style={{ margin: 5 }}>
@@ -185,11 +191,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 5
   },
-  // logoTitle: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   maxHeight: 60,
-  // },
   title: {
     fontFamily: 'PoetsenOne',
     fontSize: 36,
@@ -199,11 +200,6 @@ const styles = StyleSheet.create({
     color: '#FFF0DA',
     marginBottom: 30
   },
-  // logo: {
-  //   height: 50,
-  //   width: 50,
-  //   marginRight: 10,
-  // },
   previewContainer: {
     flex: 1,
     justifyContent: 'center',

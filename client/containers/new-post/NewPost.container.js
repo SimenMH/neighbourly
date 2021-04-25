@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import CalendarPicker from 'react-native-calendar-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createPost } from '../../services/ApiService.service';
+import moment from 'moment';
+
+import { createPost, createNotice, createEvent, createFavor } from '../../services/ApiService.service';
 
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
 import identifierIcon from '../../assets/button-icons/identifier-icon.png';
@@ -17,6 +20,9 @@ export default function NewPost({ navigation, route }) {
   const [identity, setIdentity] = useState('');
   const [editIdentity, setEditIdentity] = useState(false);
   const [allowMessages, setAllowMessages] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [eventDate, setEventDate] = useState(new Date());
 
   const { type } = route.params;
 
@@ -29,28 +35,49 @@ export default function NewPost({ navigation, route }) {
   const postIt = async () => {
     const { refreshPosts } = route.params;
     if (text) {
-      let position = await AsyncStorage.getItem('@neighbourly_location');
-      position = JSON.parse(position);
+      try {
+        let position = await AsyncStorage.getItem('@neighbourly_location');
+        position = JSON.parse(position);
 
-      const post = {
-        content: text,
-        latitude: position.latitude,
-        longitude: position.longitude,
-        color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors
-        identifier: identity.trim(),
-        allowMessages: allowMessages
-      };
+        const post = {
+          content: text,
+          latitude: position.latitude,
+          longitude: position.longitude,
+          color: Math.floor(Math.random() * 5), // 5 is the amount of different pin colors
+          identifier: identity.trim(),
+          allowMessages: allowMessages
+        };
 
-      const newPost = await createPost(post);
+        let newPost;
+        switch (type) {
+          case 'main':
+            newPost = await createPost(post);
+            break;
+          case 'notice':
+            newPost = await createNotice(post);
+            break;
+          case 'event':
+            post.eventDate = eventDate;
+            newPost = await createEvent(post);
+            break;
+          case 'favor':
+            newPost = await createFavor(post);
+            break;
+          default:
+            break;
+        }
 
-      let authored = await AsyncStorage.getItem('@neighbourly_authored');
-      if (!authored) authored = '[]';
-      authored = JSON.stringify([...JSON.parse(authored), newPost._id]);
-      await AsyncStorage.setItem('@neighbourly_authored', authored);
-      authored = await AsyncStorage.getItem('@neighbourly_authored');
+        let authored = await AsyncStorage.getItem('@neighbourly_authored');
+        if (!authored) authored = '[]';
+        authored = JSON.stringify([...JSON.parse(authored), newPost._id]);
+        await AsyncStorage.setItem('@neighbourly_authored', authored);
+        authored = await AsyncStorage.getItem('@neighbourly_authored');
 
-      navigation.goBack();
-      refreshPosts();
+        navigation.goBack();
+        refreshPosts();
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -66,6 +93,39 @@ export default function NewPost({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
+      <Modal visible={showCalendar} transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.calendarContainer}>
+            <CalendarPicker
+              selectedStartDate={selectedDate}
+              startFromMonday={true}
+              minDate={new Date()}
+              onDateChange={date => setSelectedDate(date)}
+              height={325}
+              width={350}
+              textStyle={{ fontWeight: 'bold' }}
+            />
+            <View style={styles.calendarButtonsContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  setSelectedDate(eventDate);
+                  setShowCalendar(false);
+                }}
+              >
+                <Text style={styles.calendarButton}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setEventDate(selectedDate);
+                  setShowCalendar(false);
+                }}
+              >
+                <Text style={styles.calendarButton}>Confirm</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <ScrollView style={styles.inputView}>
         <TextInput
           style={styles.input}
@@ -105,7 +165,11 @@ export default function NewPost({ navigation, route }) {
           </TouchableOpacity>
 
           {type === 'event' ? (
-            <TouchableOpacity style={styles.optionsButton} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={styles.optionsButton}
+              activeOpacity={0.8}
+              onPress={() => setShowCalendar(!showCalendar)}
+            >
               <View style={styles.iconContainer}>
                 <Image source={calendarIcon} style={styles.buttonIcons} />
               </View>
@@ -117,6 +181,7 @@ export default function NewPost({ navigation, route }) {
               </View>
             </TouchableOpacity>
           )}
+          {type === 'event' && <Text style={styles.dateText}>{moment(eventDate).format('D MMM')}</Text>}
         </View>
       ) : (
         <View style={styles.optionsContainer}>
@@ -216,5 +281,39 @@ const styles = StyleSheet.create({
   identityInput: {
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)'
+  },
+  calendarContainer: {
+    marginTop: '50%',
+    backgroundColor: '#FFFF',
+    borderRadius: 5
+  },
+  calendarButtonsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    maxHeight: 35,
+    marginTop: 10,
+    marginHorizontal: 15
+  },
+  calendarButton: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  dateText: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#FFF0DA',
+    textShadowColor: 'black',
+    textShadowOffset: {
+      height: 1,
+      width: 1
+    },
+    textShadowRadius: 1,
+    marginBottom: 5
   }
 });

@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     color: '#878787'
   },
   eventInfo: {
-    // backgroundColor: '#FFF0DA',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',

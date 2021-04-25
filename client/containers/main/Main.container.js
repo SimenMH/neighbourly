@@ -15,20 +15,28 @@ export default function Main({ navigation }) {
   const [posts, setPosts] = useState([]); //POSTS.home
 
   const checkForUser = async () => {
-    const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
-    if (!hasLocation) {
-      navigation.replace('LocationPicker');
-    } else {
-      refreshPosts();
+    try {
+      const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
+      if (!hasLocation) {
+        navigation.replace('LocationPicker');
+      } else {
+        refreshPosts();
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   const refreshPosts = async cb => {
-    const location = await AsyncStorage.getItem('@neighbourly_location');
-    const newPosts = await getAll(JSON.parse(location));
+    try {
+      const location = await AsyncStorage.getItem('@neighbourly_location');
+      const newPosts = await getAll(JSON.parse(location));
 
-    if (cb) cb();
-    setPosts(newPosts);
+      if (cb) cb();
+      setPosts(newPosts);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const goTo = newScreen => setScreen(newScreen);
