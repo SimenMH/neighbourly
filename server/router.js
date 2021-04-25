@@ -25,6 +25,7 @@ router.delete('/api/event/:id', eventController.deleteEvent); // Deletes a post
 
 // Routing for favors
 router.post('/api/favor', favorController.createFavor); // Creates a new post
+router.put('/api/favor/:id', favorController.resolveFavor); // Deletes a post
 router.delete('/api/favor/:id', favorController.deleteFavor); // Deletes a post
 
 module.exports = router;

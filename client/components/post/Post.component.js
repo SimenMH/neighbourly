@@ -17,6 +17,7 @@ import paperBackground from '../../assets/paper-texture01.jpg';
 import plusIcon from '../../assets/button-icons/plus-icon.png';
 import checkIcon from '../../assets/button-icons/check-icon-alt.png';
 import noticePin from '../../assets/notice-pin.png';
+import favorResolved from '../../assets/favor-resolved.png';
 
 export default function Post(props) {
   const post = props.post;
@@ -71,6 +72,11 @@ export default function Post(props) {
     <View style={styles.container}>
       <ImageBackground source={paperBackground} style={styles.background} />
       <View style={{ minHeight: 115 }}>
+        {props.type === 'favor' && post.resolved && (
+          <View style={styles.resolved}>
+            <Image source={favorResolved} style={{ height: 100, width: 100, opacity: 0.4 }} />
+          </View>
+        )}
         <View style={styles.pinContainer}>
           {props.type === 'notice' ? (
             <Image source={noticePin} style={styles.noticePin} />
@@ -130,7 +136,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 20,
     minHeight: 115,
-
     shadowColor: '#000',
     elevation: 4
   },
@@ -234,5 +239,14 @@ const styles = StyleSheet.create({
   buttonIcon: {
     width: '60%',
     height: '60%'
+  },
+  resolved: {
+    position: 'absolute',
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(186, 164, 122, 0.15)'
   }
 });

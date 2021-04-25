@@ -11,6 +11,22 @@ async function createFavor(ctx) {
   }
 }
 
+async function resolveFavor(ctx) {
+  try {
+    const { id } = ctx.params;
+    const favor = await Favor.findById(id);
+
+    favor.resolved = true;
+    favor.save();
+
+    ctx.body = favor;
+    ctx.status = 201;
+  } catch (err) {
+    console.log(err);
+    ctx.status = 500;
+  }
+}
+
 async function deleteFavor(ctx) {
   try {
     const { id } = ctx.params;
@@ -22,4 +38,4 @@ async function deleteFavor(ctx) {
   }
 }
 
-module.exports = { createFavor, deleteFavor };
+module.exports = { createFavor, resolveFavor, deleteFavor };

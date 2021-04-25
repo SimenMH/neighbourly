@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getAll, deletePost } from '../../services/ApiService.service';
+import { getAll, deletePost, resolveFavor } from '../../services/ApiService.service';
 
 import PostList from '../../components/post-list/PostList.component';
 import TopBar from '../../components/bars/TopBar.component';
@@ -79,6 +79,17 @@ export default function Main({ navigation }) {
     }
   };
 
+  const handleResolveFavor = async () => {
+    try {
+      await resolveFavor(postOptions.id);
+      refreshPosts();
+      setPostOptions({ ...postOptions, visible: false });
+    } catch (err) {
+      setPostOptions({ ...postOptions, visible: false });
+      console.error(err);
+    }
+  };
+
   const handleDeletePost = async () => {
     try {
       await deletePost(postOptions.id, postOptions.type);
@@ -141,7 +152,7 @@ export default function Main({ navigation }) {
             {postOptions.author ? (
               <View>
                 {postOptions.type === 'favor' && (
-                  <TouchableOpacity activeOpacity={0.6}>
+                  <TouchableOpacity onPress={handleResolveFavor} activeOpacity={0.6}>
                     <Text style={styles.optionButton}>Resolved</Text>
                     <View style={styles.lineBreak}></View>
                   </TouchableOpacity>

@@ -34,6 +34,18 @@ export const updateInterest = (id, interest) => {
     .catch(err => console.error(err));
 };
 
+export const resolveFavor = id => {
+  return fetch(`${baseUrl}/favor/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(event => event)
+    .catch(err => console.error(err));
+};
+
 export const deletePost = (id, type) => {
   if (type === 'home') type = 'post';
   return fetch(`${baseUrl}/${type}/${id}`, {
