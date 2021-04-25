@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Main from './screens/main/Main.screen';
 import NewPost from './screens/new-post/NewPost.screen';
+import Settings from './screens/settings/Settings.screen';
 import LocationPicker from './screens/location-picker/LocationPicker.screen';
 import MapScreen from './screens/map/Map.screen';
 
@@ -48,7 +49,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name='Main' component={Main} />
           <Stack.Screen name='NewPost' component={NewPost} />
-          <Stack.Screen name='Settings' component={LocationPicker} />
+          <Stack.Screen name='Settings' component={Settings} />
           <Stack.Screen name='LocationPicker' component={LocationPicker} />
           <Stack.Screen name='MapScreen' component={MapScreen} />
         </Stack.Navigator>

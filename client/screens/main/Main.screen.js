@@ -62,7 +62,7 @@ export default function Main({ navigation }) {
   const navigateNewPost = () =>
     navigation.navigate('NewPost', { type: screen, refreshPosts: () => refreshPosts() });
 
-  const navigateSettings = () => navigation.navigate('LocationPicker');
+  const navigateSettings = () => navigation.navigate('Settings');
 
   const displayPostOptions = async (id, type, allowMessages) => {
     try {
