@@ -15,7 +15,13 @@ export default function PostList(props) {
     <View style={styles.container}>
       <FlatList
         data={props.posts}
-        renderItem={({ item }) => <Post post={{ ...item }} type={props.type} />}
+        renderItem={({ item }) => (
+          <Post
+            post={{ ...item }}
+            type={props.type}
+            handlePostOptions={(id, type, allowMessages) => props.handlePostOptions(id, type, allowMessages)}
+          />
+        )}
         keyExtractor={post => post._id}
         style={{ minWidth: '100%' }}
         contentContainerStyle={{ paddingBottom: 100 }}
