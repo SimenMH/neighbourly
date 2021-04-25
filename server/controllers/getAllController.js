@@ -4,7 +4,7 @@ const Event = require('../models/event');
 const Favor = require('../models/favor');
 const measureDistance = require('../helpers/meterDistance');
 
-const maxDist = 250;
+const maxDist = 150;
 
 async function getAll(ctx) {
   try {

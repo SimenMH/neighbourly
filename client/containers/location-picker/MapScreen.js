@@ -12,8 +12,8 @@ export default function MapScreen(props) {
 
   const mapRegion = {
     ...coords,
-    longitudeDelta: 0.002,
-    latitudeDelta: 0.002
+    longitudeDelta: 0.01,
+    latitudeDelta: 0.01
   };
 
   const confirmHandler = () => {
@@ -24,7 +24,7 @@ export default function MapScreen(props) {
   return (
     <View style={styles.container}>
       <MapView style={{ flex: 1 }} onPress={selectLocationHandler} initialRegion={mapRegion}>
-        {pickedLocation && <Marker title='Picked Location' coordinate={pickedLocation}></Marker>}
+        {pickedLocation && <Marker coordinate={pickedLocation}></Marker>}
       </MapView>
       <TouchableOpacity style={styles.confirm} activeOpacity={0.8} onPress={() => confirmHandler()}>
         <View style={styles.iconContainer}>
