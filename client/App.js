@@ -8,10 +8,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Main from './screens/main/Main.container';
-import NewPost from './screens/new-post/NewPost.container';
-import LocationPicker from './screens/location-picker/LocationPicker.container';
-import MapScreen from './screens/map-screen/MapScreen';
+import Main from './screens/main/Main.screen';
+import NewPost from './screens/new-post/NewPost.screen';
+import LocationPicker from './screens/location-picker/LocationPicker.screen';
+import MapScreen from './screens/map/Map.screen';
 
 console.disableYellowBox = true;
 const Stack = createStackNavigator();
