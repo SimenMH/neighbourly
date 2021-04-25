@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   optionButton: {
-    fontSize: 25
+    fontSize: 20
   },
   lineBreak: {
     borderBottomColor: 'lightgrey',
@@ -224,6 +224,6 @@ const styles = StyleSheet.create({
     marginBottom: -7
   },
   cancelText: {
-    fontSize: 18
+    fontSize: 14
   }
 });
