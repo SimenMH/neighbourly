@@ -140,6 +140,12 @@ export default function Main({ navigation }) {
           <View style={styles.optionsContainer}>
             {postOptions.author ? (
               <View>
+                {postOptions.type === 'favor' && (
+                  <TouchableOpacity activeOpacity={0.6}>
+                    <Text style={styles.optionButton}>Resolved</Text>
+                    <View style={styles.lineBreak}></View>
+                  </TouchableOpacity>
+                )}
                 <TouchableOpacity onPress={handleDeletePost} activeOpacity={0.6}>
                   <Text style={styles.optionButton}>Delete</Text>
                   <View style={styles.lineBreak}></View>
