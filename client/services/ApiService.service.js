@@ -8,8 +8,9 @@ export const getAll = pos => {
     .catch(err => console.error(err));
 };
 
-export const createPost = post => {
-  return fetch(`${baseUrl}/post`, {
+export const createPost = (post, type) => {
+  if (type === 'home') type = 'post';
+  return fetch(`${baseUrl}/${type}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -21,46 +22,6 @@ export const createPost = post => {
     .catch(err => console.error(err));
 };
 
-export const createNotice = notice => {
-  return fetch(`${baseUrl}/notice`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(notice)
-  })
-    .then(res => res.json())
-    .then(notice => notice)
-    .catch(err => console.error(err));
-};
-
-export const createEvent = event => {
-  return fetch(`${baseUrl}/event`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(event)
-  })
-    .then(res => res.json())
-    .then(event => event)
-    .catch(err => console.error(err));
-};
-
-export const createFavor = favor => {
-  return fetch(`${baseUrl}/favor`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(favor)
-  })
-    .then(res => res.json())
-    .then(favor => favor)
-    .catch(err => console.error(err));
-};
-
-// Delete && update interest for events
 export const updateInterest = (id, interest) => {
   return fetch(`${baseUrl}/event/${id}/${interest}`, {
     method: 'PUT',
@@ -71,4 +32,11 @@ export const updateInterest = (id, interest) => {
     .then(res => res.json())
     .then(event => event)
     .catch(err => console.error(err));
+};
+
+export const deletePost = (id, type) => {
+  if (type === 'home') type = 'post';
+  return fetch(`${baseUrl}/${type}/${id}`, {
+    method: 'DELETE'
+  }).catch(err => console.error(err));
 };

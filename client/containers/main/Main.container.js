@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { getAll } from '../../services/ApiService.service';
+import { getAll, deletePost } from '../../services/ApiService.service';
 
 import PostList from '../../components/post-list/PostList.component';
 import TopBar from '../../components/bars/TopBar.component';
@@ -12,7 +12,7 @@ import corkBackground from '../../assets/cork-texture01.jpg';
 
 export default function Main({ navigation }) {
   const [screen, setScreen] = useState('home');
-  const [posts, setPosts] = useState([]); //POSTS.home
+  const [posts, setPosts] = useState({}); //POSTS.home
   const [postOptions, setPostOptions] = useState({
     visible: false,
     author: false,
@@ -37,7 +37,16 @@ export default function Main({ navigation }) {
   const refreshPosts = async () => {
     try {
       const location = await AsyncStorage.getItem('@neighbourly_location');
-      const newPosts = await getAll(JSON.parse(location));
+      const hiddenArr = await AsyncStorage.getItem('@neighbourly_hidden');
+      let newPosts = await getAll(JSON.parse(location));
+
+      if (hiddenArr) {
+        Object.keys(newPosts).forEach(type => {
+          newPosts[type] = newPosts[type].filter(({ _id }) => {
+            return !hiddenArr.includes(_id);
+          });
+        });
+      }
 
       setPosts(newPosts);
     } catch (err) {
@@ -56,14 +65,53 @@ export default function Main({ navigation }) {
   const navigateSettings = () => navigation.navigate('LocationPicker');
 
   const displayPostOptions = async (id, type, allowMessages) => {
-    let author = false;
-    let authored = await AsyncStorage.getItem('@neighbourly_authored');
-    if (authored) {
-      authored = JSON.parse(authored);
-      author = authored.includes(id);
+    try {
+      let author = false;
+      let authored = await AsyncStorage.getItem('@neighbourly_authored');
+      if (authored) {
+        authored = JSON.parse(authored);
+        author = authored.includes(id);
+      }
+      setPostOptions({ visible: true, author, id, type, allowMessages });
+    } catch (err) {
+      setPostOptions({ ...postOptions, visible: false });
+      console.error(err);
     }
-    console.log(author);
-    setPostOptions({ visible: true, author, id, type, allowMessages });
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      await deletePost(postOptions.id, postOptions.type);
+      setPostOptions({ ...postOptions, visible: false });
+      refreshPosts();
+    } catch (err) {
+      setPostOptions({ ...postOptions, visible: false });
+      console.error(err);
+    }
+  };
+
+  const hidePost = async () => {
+    try {
+      const id = postOptions.id;
+      const type = postOptions.type;
+      setPostOptions({ ...postOptions, visible: false });
+
+      let hiddenArr = await AsyncStorage.getItem('@neighbourly_hidden');
+      if (hiddenArr) {
+        hiddenArr = JSON.parse(hiddenArr);
+        hiddenArr.push(id);
+      } else hiddenArr = [id];
+      await AsyncStorage.setItem('@neighbourly_hidden', JSON.stringify(hiddenArr));
+
+      const filteredPosts = { ...posts };
+
+      filteredPosts[type] = filteredPosts[type].filter(({ _id }) => !hiddenArr.includes(_id));
+
+      setPosts(filteredPosts);
+    } catch (err) {
+      setPostOptions({ ...postOptions, visible: false });
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -92,7 +140,7 @@ export default function Main({ navigation }) {
           <View style={styles.optionsContainer}>
             {postOptions.author ? (
               <View>
-                <TouchableOpacity activeOpacity={0.6}>
+                <TouchableOpacity onPress={handleDeletePost} activeOpacity={0.6}>
                   <Text style={styles.optionButton}>Delete</Text>
                   <View style={styles.lineBreak}></View>
                 </TouchableOpacity>
@@ -100,12 +148,12 @@ export default function Main({ navigation }) {
             ) : (
               <View>
                 {postOptions.allowMessages && (
-                  <TouchableOpacity onPress={() => console.log(postOptions.type)} activeOpacity={0.6}>
+                  <TouchableOpacity activeOpacity={0.6}>
                     <Text style={styles.optionButton}>Send message</Text>
                     <View style={styles.lineBreak}></View>
                   </TouchableOpacity>
                 )}
-                <TouchableOpacity activeOpacity={0.6}>
+                <TouchableOpacity onPress={hidePost} activeOpacity={0.6}>
                   <Text style={styles.optionButton}>Hide this post</Text>
                   <View style={styles.lineBreak}></View>
                 </TouchableOpacity>

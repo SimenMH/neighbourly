@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import moment from 'moment';
 
-import { createPost, createNotice, createEvent, createFavor } from '../../services/ApiService.service';
+import { createPost } from '../../services/ApiService.service';
 
 import backIcon from '../../assets/button-icons/back-icon-alt.png';
 import identifierIcon from '../../assets/button-icons/identifier-icon.png';
@@ -48,24 +48,7 @@ export default function NewPost({ navigation, route }) {
           allowMessages: allowMessages
         };
 
-        let newPost;
-        switch (type) {
-          case 'home':
-            newPost = await createPost(post);
-            break;
-          case 'notice':
-            newPost = await createNotice(post);
-            break;
-          case 'event':
-            post.eventDate = eventDate;
-            newPost = await createEvent(post);
-            break;
-          case 'favor':
-            newPost = await createFavor(post);
-            break;
-          default:
-            break;
-        }
+        const newPost = await createPost(post, type);
 
         let authored = await AsyncStorage.getItem('@neighbourly_authored');
         if (!authored) authored = '[]';
