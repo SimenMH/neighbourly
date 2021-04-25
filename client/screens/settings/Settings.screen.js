@@ -119,10 +119,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    // fontWeight: '700',
     marginLeft: 20,
     marginTop: -5,
-    color: '#FFF0DA'
+    color: '#FFF'
   },
   contentContainer: {
     flex: 1,
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     width: '90%',
-    // paddingVertical: 10,
     marginVertical: 5
   },
   optionButton: {
