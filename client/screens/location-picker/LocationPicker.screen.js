@@ -4,7 +4,7 @@ import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 
-import MapPreview from '../../components/map-components/MapPreview.component';
+import MapPreview from '../../components/map-preview/MapPreview.component';
 
 import backIcon from '../../assets/button-icons/back-icon.png';
 
