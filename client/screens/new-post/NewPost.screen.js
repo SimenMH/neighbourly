@@ -40,7 +40,7 @@ export default function NewPost({ navigation, route }) {
         let position = await AsyncStorage.getItem('@neighbourly_location');
         position = JSON.parse(position);
 
-        const post = {
+        let post = {
           content: text,
           latitude: position.latitude,
           longitude: position.longitude,
@@ -48,6 +48,8 @@ export default function NewPost({ navigation, route }) {
           identifier: identity.trim(),
           allowMessages: allowMessages
         };
+
+        if (type === 'event') post.eventDate = eventDate;
 
         const newPost = await createPost(post, type);
 
