@@ -13,33 +13,5 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     opacity: 0.1
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)'
-  },
-  optionsContainer: {
-    width: '65%',
-    backgroundColor: 'whitesmoke',
-    padding: 20
-  },
-  optionButton: {
-    fontSize: 20
-  },
-  lineBreak: {
-    borderBottomColor: 'lightgrey',
-    borderBottomWidth: 1,
-    marginVertical: 5
-  },
-  cancelContainer: {
-    flex: 0,
-    alignItems: 'flex-end',
-    marginTop: 15,
-    marginBottom: -7
-  },
-  cancelText: {
-    fontSize: 14
   }
 });
