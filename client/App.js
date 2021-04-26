@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, LogBox } from 'react-native';
 import { useFonts } from 'expo-font';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,7 +14,7 @@ import Settings from './screens/settings/Settings.screen';
 import LocationPicker from './screens/location-picker/LocationPicker.screen';
 import MapScreen from './screens/map/Map.screen';
 
-console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 const Stack = createStackNavigator();
 
 export default function App() {
