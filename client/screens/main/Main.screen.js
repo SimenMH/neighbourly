@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Modal, Alert } from 'react-native';
+import { View, ImageBackground, Alert } from 'react-native';
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,6 +8,7 @@ import { getAll, deletePost, resolveFavor } from '../../services/ApiService.serv
 import PostList from '../../components/post-list/PostList.component';
 import TopBar from '../../components/bars/TopBar.component';
 import BottomBar from '../../components/bars/BottomBar.component';
+import PostOptions from '../../components/post-options/PostOptions.component';
 
 import corkBackground from '../../assets/cork-texture01.jpg';
 
@@ -153,51 +154,13 @@ export default function Main({ navigation }) {
         navigateNewPost={() => navigateNewPost()}
         changeScreen={newScreen => goTo(newScreen)}
       />
-      <Modal visible={postOptions.visible} transparent={true}>
-        <View style={styles.modalContainer}>
-          <View style={styles.optionsContainer}>
-            {postOptions.author ? (
-              <View>
-                {postOptions.type === 'favor' && (
-                  <TouchableOpacity onPress={handleResolveFavor} activeOpacity={0.6}>
-                    <Text style={styles.optionButton}>Resolved</Text>
-                    <View style={styles.lineBreak}></View>
-                  </TouchableOpacity>
-                )}
-                <TouchableOpacity onPress={handleDeletePost} activeOpacity={0.6}>
-                  <Text style={styles.optionButton}>Delete</Text>
-                  <View style={styles.lineBreak}></View>
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <View>
-                {postOptions.allowMessages && (
-                  <TouchableOpacity activeOpacity={0.6}>
-                    <Text style={styles.optionButton}>Send message</Text>
-                    <View style={styles.lineBreak}></View>
-                  </TouchableOpacity>
-                )}
-                <TouchableOpacity onPress={hidePost} activeOpacity={0.6}>
-                  <Text style={styles.optionButton}>Hide this post</Text>
-                  <View style={styles.lineBreak}></View>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.6}>
-                  <Text style={styles.optionButton}>Report</Text>
-                  <View style={styles.lineBreak}></View>
-                </TouchableOpacity>
-              </View>
-            )}
-            <View style={styles.cancelContainer}>
-              <TouchableOpacity
-                onPress={() => setPostOptions({ ...postOptions, visible: false })}
-                activeOpacity={0.6}
-              >
-                <Text style={styles.cancelText}>CANCEL</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <PostOptions
+        postOptions={postOptions}
+        handleResolveFavor={() => handleResolveFavor()}
+        handleDeletePost={() => handleDeletePost()}
+        hidePost={() => hidePost()}
+        setPostOptions={newObj => setPostOptions(newObj)}
+      />
     </View>
   );
 }
