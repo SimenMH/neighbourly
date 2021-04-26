@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, Modal, Alert } from 'react-native';
 import { styles } from './styles';
 import CalendarPicker from 'react-native-calendar-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -60,6 +60,7 @@ export default function NewPost({ navigation, route }) {
         navigation.goBack();
         refreshPosts();
       } catch (err) {
+        Alert.alert('Something went wrong', 'Please try again later');
         console.error(err);
       }
     }

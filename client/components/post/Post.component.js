@@ -26,31 +26,39 @@ export default function Post(props) {
 
   const toggleInterest = async () => {
     setFetchingInterest(true);
-    await updateInterest(post._id, !interested);
+    try {
+      await updateInterest(post._id, !interested);
 
-    let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
-    if (interestedEvents) interestedEvents = JSON.parse(interestedEvents);
-    else interestedEvents = [];
+      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      if (interestedEvents) interestedEvents = JSON.parse(interestedEvents);
+      else interestedEvents = [];
 
-    if (!interested) {
-      interestedEvents.push(post._id);
-      post.interest += 1;
-    } else {
-      interestedEvents = interestedEvents.filter(id => id !== post._id);
-      post.interest -= 1;
+      if (!interested) {
+        interestedEvents.push(post._id);
+        post.interest += 1;
+      } else {
+        interestedEvents = interestedEvents.filter(id => id !== post._id);
+        post.interest -= 1;
+      }
+      await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
+      setInterested(!interested);
+    } catch (err) {
+      console.error(err);
     }
-    await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
-    setInterested(!interested);
 
     setFetchingInterest(false);
   };
 
   const fetchInterest = async () => {
     setFetchingInterest(true);
-    let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
-    if (interestedEvents) {
-      interestedEvents = JSON.parse(interestedEvents);
-      if (interestedEvents.includes(post._id)) setInterested(true);
+    try {
+      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      if (interestedEvents) {
+        interestedEvents = JSON.parse(interestedEvents);
+        if (interestedEvents.includes(post._id)) setInterested(true);
+      }
+    } catch (err) {
+      console.error(err);
     }
     setFetchingInterest(false);
   };

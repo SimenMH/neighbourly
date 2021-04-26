@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, Modal, Alert } from 'react-native';
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -31,6 +31,7 @@ export default function Main({ navigation }) {
         refreshPosts();
       }
     } catch (err) {
+      Alert.alert('Something went wrong', 'Please restart the app');
       console.error(err);
     }
   };
@@ -51,6 +52,7 @@ export default function Main({ navigation }) {
 
       setPosts(newPosts);
     } catch (err) {
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };
@@ -76,6 +78,7 @@ export default function Main({ navigation }) {
       setPostOptions({ visible: true, author, id, type, allowMessages });
     } catch (err) {
       setPostOptions({ ...postOptions, visible: false });
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };
@@ -87,6 +90,7 @@ export default function Main({ navigation }) {
       setPostOptions({ ...postOptions, visible: false });
     } catch (err) {
       setPostOptions({ ...postOptions, visible: false });
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };
@@ -98,6 +102,7 @@ export default function Main({ navigation }) {
       refreshPosts();
     } catch (err) {
       setPostOptions({ ...postOptions, visible: false });
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };
@@ -122,6 +127,7 @@ export default function Main({ navigation }) {
       setPosts(filteredPosts);
     } catch (err) {
       setPostOptions({ ...postOptions, visible: false });
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };

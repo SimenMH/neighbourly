@@ -1,11 +1,22 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { styles } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import backIcon from '../../assets/button-icons/back-icon.png';
 import rightArrowIcon from '../../assets/button-icons/right-arrow-icon.png';
 
 export default function Settings({ navigation }) {
+  const resetHiddenPosts = async () => {
+    try {
+      await AsyncStorage.removeItem('@neighbourly_hidden');
+      Alert.alert('Hidden posts reset', 'Hidden posts were successfully reset');
+    } catch (err) {
+      Alert.alert('Something went wrong', 'Please try again later');
+      console.error(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
@@ -23,7 +34,7 @@ export default function Settings({ navigation }) {
             </View>
           </TouchableOpacity>
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
+          <TouchableOpacity onPress={resetHiddenPosts} activeOpacity={0.8}>
             <View style={styles.optionButton}>
               <Text style={styles.optionText}>Reset Hidden Posts</Text>
               <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />

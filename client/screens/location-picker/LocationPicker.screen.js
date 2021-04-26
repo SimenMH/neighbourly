@@ -29,23 +29,21 @@ export default function LocationPicker(props) {
     try {
       const hasPermission = await verifyPermissions();
       if (!hasPermission) {
+        setFetching(false);
         return;
       }
-      try {
-        const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
-        setPickedLocation({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude
-        });
-      } catch (err) {
-        Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [
-          { text: 'Okay' }
-        ]);
-      }
-      setFetching(false);
+      const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
+      setPickedLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude
+      });
     } catch (err) {
+      Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [
+        { text: 'Okay' }
+      ]);
       console.error(err);
     }
+    setFetching(false);
   };
 
   const getLocationHandler = async () => {
@@ -75,6 +73,7 @@ export default function LocationPicker(props) {
       await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
       props.navigation.reset({ index: 0, routes: [{ name: 'Main' }] });
     } catch (err) {
+      Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
     }
   };
