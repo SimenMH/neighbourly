@@ -17,6 +17,17 @@ export default function Settings({ navigation }) {
     }
   };
 
+  const renderOption = (text, onPressHandler) => {
+    return (
+      <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
+        <View style={styles.optionButton}>
+          <Text style={styles.optionText}>{text}</Text>
+          <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
@@ -27,84 +38,29 @@ export default function Settings({ navigation }) {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.settingsContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('LocationPicker')} activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Change Location</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Change Location', () => navigation.navigate('LocationPicker'))}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity onPress={resetHiddenPosts} activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Reset Hidden Posts</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Reset Hidden Posts', resetHiddenPosts)}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Chat</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Chat', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Notification Settings</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Notification Settings', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Preferences</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Preferences', () => {})}
         </View>
         <View style={styles.settingsContainer}>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>FAQ</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('FAQ', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>About Us</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('About Us', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Contact Us</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Contact Us', () => {})}
         </View>
         <View style={styles.settingsContainer}>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Community Guidelines</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Community Guidelines', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Privacy Policy</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Privacy Policy', () => {})}
           <View style={styles.lineBreak}></View>
-          <TouchableOpacity activeOpacity={0.8}>
-            <View style={styles.optionButton}>
-              <Text style={styles.optionText}>Terms of Service</Text>
-              <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
-            </View>
-          </TouchableOpacity>
+          {renderOption('Terms of Service', () => {})}
         </View>
       </View>
     </View>
