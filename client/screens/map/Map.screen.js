@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
+import { styles } from './styles';
 import MapView, { Marker } from 'react-native-maps';
 
 import checkIcon from '../../assets/button-icons/check-icon-alt.png';
@@ -34,28 +35,3 @@ export default function MapScreen(props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%'
-  },
-  confirm: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    width: 60,
-    height: 60,
-    backgroundColor: '#215AF3',
-    borderRadius: 50
-  },
-  iconContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonIcon: {
-    height: '50%',
-    width: '50%'
-  }
-});

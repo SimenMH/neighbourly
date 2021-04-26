@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
+import { View, FlatList, RefreshControl } from 'react-native';
+import { styles } from './styles';
 
 import Post from '../post/Post.component';
 
@@ -31,11 +32,3 @@ export default function PostList(props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    paddingBottom: 100
-  }
-});
