@@ -3,39 +3,30 @@ import { Modal, View, TouchableOpacity, Text } from 'react-native';
 import { styles } from './styles';
 
 export default function PostOptions(props) {
+  const renderOption = (text, onPressHandler) => {
+    return (
+      <TouchableOpacity onPress={onPressHandler} activeOpacity={0.6}>
+        <Text style={styles.optionButton}>{text}</Text>
+        <View style={styles.lineBreak}></View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <Modal visible={props.postOptions.visible} transparent={true}>
       <View style={styles.modalContainer}>
         <View style={styles.optionsContainer}>
           {props.postOptions.author ? (
             <View>
-              {props.postOptions.type === 'favor' && (
-                <TouchableOpacity onPress={props.handleResolveFavor} activeOpacity={0.6}>
-                  <Text style={styles.optionButton}>Resolved</Text>
-                  <View style={styles.lineBreak}></View>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity onPress={props.handleDeletePost} activeOpacity={0.6}>
-                <Text style={styles.optionButton}>Delete</Text>
-                <View style={styles.lineBreak}></View>
-              </TouchableOpacity>
+              {props.postOptions.type === 'favor' && renderOption('Resolved', props.handleResolveFavor)}
+              {renderOption('Resolved', props.handleDeletePost)}
             </View>
           ) : (
             <View>
-              {props.postOptions.allowMessages && (
-                <TouchableOpacity activeOpacity={0.6}>
-                  <Text style={styles.optionButton}>Send message</Text>
-                  <View style={styles.lineBreak}></View>
-                </TouchableOpacity>
-              )}
-              <TouchableOpacity onPress={props.hidePost} activeOpacity={0.6}>
-                <Text style={styles.optionButton}>Hide this post</Text>
-                <View style={styles.lineBreak}></View>
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Text style={styles.optionButton}>Report</Text>
-                <View style={styles.lineBreak}></View>
-              </TouchableOpacity>
+              {props.postOptions.allowMessages && renderOption('Send Message')}
+              {renderOption('Hide this post', props.hidePost)}
+              {props.postOptions.type === 'notice' && renderOption('Mark as not important')}
+              {renderOption('Report')}
             </View>
           )}
           <View style={styles.cancelContainer}>
