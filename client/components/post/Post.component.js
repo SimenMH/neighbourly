@@ -9,7 +9,7 @@ import moment from 'moment'; // DayJS date-fns
 import paperBackground from '../../assets/paper-texture01.jpg';
 import plusIcon from '../../assets/button-icons/plus-icon.png';
 import checkIcon from '../../assets/button-icons/check-icon-alt.png';
-import noticePin from '../../assets/notice-pin.png';
+import noticePin from '../../assets/notice-pin-alt.png';
 import favorResolved from '../../assets/favor-resolved.png';
 
 export default function Post(props) {

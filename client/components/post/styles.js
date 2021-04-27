@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
     elevation: 3
   },
   noticePin: {
-    height: 15,
-    width: 15
+    height: 18,
+    width: 18
   },
   content: {
     fontFamily: 'Roboto',
