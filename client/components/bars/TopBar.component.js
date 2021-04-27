@@ -40,7 +40,10 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'PoetsenOne',
     fontSize: 36,
-    color: '#FFF0DA'
+    color: '#FFF0DA',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 5
   },
   logo: {
     height: 50,

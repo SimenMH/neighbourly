@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ImageBackground, Alert } from 'react-native';
+import { View, Text, ImageBackground, Alert } from 'react-native';
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -140,6 +140,15 @@ export default function Main({ navigation }) {
   return (
     <View style={styles.container}>
       <TopBar navigateSettings={navigateSettings} />
+      {screen === 'notice' && (
+        <View style={styles.banner}>
+          <Text style={styles.bannerText}>
+            {
+              'Post important notices or warnings for your neighbours.\n For nonurgent posts, please use the Home tab.'
+            }
+          </Text>
+        </View>
+      )}
       <View>
         <ImageBackground source={corkBackground} style={styles.background} />
         <PostList
