@@ -9,6 +9,7 @@ import favorIcon from '../../assets/button-icons/favor-icon.png';
 export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
   const goTo = screen => changeScreen(screen);
 
+  // TODO: Could try to make these buttons a function that returns a reusable component instead. But watch out for the margins on the Notice and Event buttons
   return (
     <View style={styles.container}>
       <View style={styles.bottomBar}>

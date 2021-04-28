@@ -6,6 +6,7 @@ import { GOOGLE_API_KEY } from '@env';
 
 export default function MapPreview(props) {
   let mapUrl;
+  // Google Maps Static API docs: https://developers.google.com/maps/documentation/maps-static/overview
   if (props.location) {
     mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.latitude},${props.location.longitude}&zoom=17&size=400x200&maptype=roadmap&markers=color:green%7C${props.location.latitude},${props.location.longitude}&key=${GOOGLE_API_KEY}`;
   }

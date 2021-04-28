@@ -9,12 +9,12 @@ import MapPreview from '../../components/map-preview/MapPreview.component';
 import backIcon from '../../assets/button-icons/back-icon.png';
 
 export default function LocationPicker(props) {
-  const [isFetching, setFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(true);
   const [pickedLocation, setPickedLocation] = useState();
   const [hasLocation, setHasLocation] = useState(false);
 
   const verifyPermissions = async () => {
-    setFetching(true);
+    setIsFetching(true);
     const result = await Location.requestForegroundPermissionsAsync();
     if (result.status !== 'granted') {
       Alert.alert('Insufficient permissions!', 'You need to grant location permissions to use this app.', [
@@ -28,22 +28,20 @@ export default function LocationPicker(props) {
   const getCurrentLocation = async () => {
     try {
       const hasPermission = await verifyPermissions();
-      if (!hasPermission) {
-        setFetching(false);
-        return;
+      if (hasPermission) {
+        const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
+        setPickedLocation({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        });
       }
-      const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
-      setPickedLocation({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      });
     } catch (err) {
       Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [
         { text: 'Okay' }
       ]);
       console.error(err);
     }
-    setFetching(false);
+    setIsFetching(false);
   };
 
   const getLocationHandler = async () => {
@@ -52,7 +50,7 @@ export default function LocationPicker(props) {
       if (curSelectedLocation) {
         setHasLocation(true);
         setPickedLocation(JSON.parse(curSelectedLocation));
-        setFetching(false);
+        setIsFetching(false);
       } else {
         getCurrentLocation();
       }

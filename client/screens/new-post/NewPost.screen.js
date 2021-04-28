@@ -120,7 +120,7 @@ export default function NewPost({ navigation, route }) {
           scrollEnabled={true}
           maxLength={345 - lineBreaks * 23} // For each linebreak, decrease the max length by 23
           onChangeText={setText}
-          placeholder={'Share your thoughts and experiences with the neighbours around you'}
+          placeholder={'Share some thoughts or ideas to the neighbours around you.'}
         />
       </ScrollView>
       {!editIdentity ? (

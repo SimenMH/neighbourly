@@ -4,7 +4,7 @@ import { styles } from './styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { updateInterest } from '../../services/ApiService.service';
-import moment from 'moment'; // DayJS date-fns
+import moment from 'moment'; // Alternatives: DayJS or date-fns
 
 import paperBackground from '../../assets/paper-texture01.jpg';
 import plusIcon from '../../assets/button-icons/plus-icon.png';
@@ -40,7 +40,9 @@ export default function Post(props) {
         interestedEvents = interestedEvents.filter(id => id !== post._id);
         post.interest -= 1;
       }
+      // Always stringify before saving to storage. AsyncStorage expects a string
       await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
+
       setInterested(!interested);
     } catch (err) {
       console.error(err);

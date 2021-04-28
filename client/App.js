@@ -14,7 +14,7 @@ import Settings from './screens/settings/Settings.screen';
 import LocationPicker from './screens/location-picker/LocationPicker.screen';
 import MapScreen from './screens/map/Map.screen';
 
-LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs(); // Removes yellow warnings from popping up infront of the app in Expo during development
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -34,7 +34,7 @@ export default function App() {
   };
 
   useState(() => {
-    resetStorage(); // Temporary
+    resetStorage(); // Temporary, only use this for development
   }, []);
 
   if (!fontsLoaded) {

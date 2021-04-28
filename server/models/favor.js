@@ -26,7 +26,10 @@ const favor = new mongoose.Schema(
       type: Boolean,
       required: false
     },
-    resolved: Boolean
+    resolved: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

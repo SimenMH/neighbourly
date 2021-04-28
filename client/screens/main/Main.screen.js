@@ -25,10 +25,12 @@ export default function Main({ navigation }) {
 
   const checkForUser = async () => {
     try {
+      // Check if there is a location stored on the device, if not then navigate to LocationPicker screen to do first time setup
       const hasLocation = await AsyncStorage.getItem('@neighbourly_location');
       if (!hasLocation) {
         navigation.replace('LocationPicker');
       } else {
+        // Else just fetch all the posts from the database
         refreshPosts();
       }
     } catch (err) {
@@ -41,6 +43,7 @@ export default function Main({ navigation }) {
     try {
       const location = await AsyncStorage.getItem('@neighbourly_location');
       const hiddenArr = await AsyncStorage.getItem('@neighbourly_hidden');
+      // Remember to always JSON.parse any data you receive from AsyncStorage
       let newPosts = await getAll(JSON.parse(location));
 
       if (hiddenArr) {
@@ -60,10 +63,12 @@ export default function Main({ navigation }) {
 
   const goTo = newScreen => {
     setScreen(newScreen);
-    refreshPosts();
+    // NOTE: Uncomment this if you want to refetch posts any time you change screen
+    // refreshPosts();
   };
 
   const navigateNewPost = () =>
+    // This is bad. Passing callback to navigation props is dangerous. Find a solution to this
     navigation.navigate('NewPost', { type: screen, refreshPosts: () => refreshPosts() });
 
   const navigateSettings = () => navigation.navigate('Settings');
@@ -72,6 +77,7 @@ export default function Main({ navigation }) {
     try {
       let author = false;
       let authored = await AsyncStorage.getItem('@neighbourly_authored');
+      // This will be false if AsyncStorage has no data associatd with @neighbourly_authored
       if (authored) {
         authored = JSON.parse(authored);
         author = authored.includes(id);
@@ -87,6 +93,7 @@ export default function Main({ navigation }) {
   const handleResolveFavor = async () => {
     try {
       await resolveFavor(postOptions.id);
+      // TODO: Shouldn't need to refresh posts here, find a way to update the post to 'resolved' in the client side without doing an API call
       refreshPosts();
       setPostOptions({ ...postOptions, visible: false });
     } catch (err) {
@@ -100,6 +107,7 @@ export default function Main({ navigation }) {
     try {
       await deletePost(postOptions.id, postOptions.type);
       setPostOptions({ ...postOptions, visible: false });
+      // TODO: Shouldn't need to refresh posts here, find a way to delete the post on the client side without doing an API call
       refreshPosts();
     } catch (err) {
       setPostOptions({ ...postOptions, visible: false });
@@ -108,7 +116,7 @@ export default function Main({ navigation }) {
     }
   };
 
-  const hidePost = async () => {
+  const handleHidePost = async () => {
     try {
       const id = postOptions.id;
       const type = postOptions.type;
@@ -167,7 +175,7 @@ export default function Main({ navigation }) {
         postOptions={postOptions}
         handleResolveFavor={() => handleResolveFavor()}
         handleDeletePost={() => handleDeletePost()}
-        hidePost={() => hidePost()}
+        hidePost={() => handleHidePost()}
         setPostOptions={newObj => setPostOptions(newObj)}
       />
     </View>

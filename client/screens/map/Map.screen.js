@@ -5,17 +5,19 @@ import MapView, { Marker } from 'react-native-maps';
 
 import checkIcon from '../../assets/button-icons/check-icon-alt.png';
 
-// import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-// https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=YOUR_API_KEY
+// NOTE REGARDING COMMENTED CODE: I could not figure out a way to make the search bar update the map position on enter. (GooglePlacesInput onPress)
+// Uncomment all the commented code to see a search bar added to the map screen. See if you can find a solution to make the search bar work.
 
+// import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 // import { GOOGLE_API_KEY } from '@env';
 
 export default function MapScreen(props) {
   const coords = props.route.params.coordinates;
   const [pickedLocation, setPickedLocation] = useState(coords);
 
-  const mapRegion = {
+  const initialMapRegion = {
     ...coords,
+    // This is the zoom
     longitudeDelta: 0.01,
     latitudeDelta: 0.01
   };
@@ -57,7 +59,7 @@ export default function MapScreen(props) {
 
   return (
     <View style={styles.container}>
-      <MapView style={{ flex: 1 }} onPress={selectLocationHandler} initialRegion={mapRegion}>
+      <MapView style={{ flex: 1 }} onPress={selectLocationHandler} initialRegion={initialMapRegion}>
         {pickedLocation && <Marker coordinate={pickedLocation}></Marker>}
       </MapView>
       <TouchableOpacity style={styles.confirm} activeOpacity={0.8} onPress={() => confirmHandler()}>

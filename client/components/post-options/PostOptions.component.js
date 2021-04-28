@@ -19,7 +19,7 @@ export default function PostOptions(props) {
           {props.postOptions.author ? (
             <View>
               {props.postOptions.type === 'favor' && renderOption('Resolved', props.handleResolveFavor)}
-              {renderOption('Resolved', props.handleDeletePost)}
+              {renderOption('Delete', props.handleDeletePost)}
             </View>
           ) : (
             <View>

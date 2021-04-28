@@ -1,4 +1,6 @@
-const baseUrl = 'http://10.0.0.20:3001/api';
+// Use your IPv4 address here instead of localhost to be able to launch the app on your phone instead of on an emulator
+// e.g. 'http://10.0.0.1:3001/api'
+const baseUrl = 'http://10.0.0.20:3001/api'; // This should be moved to .env
 
 export const getAll = pos => {
   const posParam = `${pos.latitude},${pos.longitude}`;
@@ -42,7 +44,7 @@ export const resolveFavor = id => {
     }
   })
     .then(res => res.json())
-    .then(event => event)
+    .then(favor => favor)
     .catch(err => console.error(err));
 };
 

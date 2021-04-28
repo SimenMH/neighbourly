@@ -20,7 +20,7 @@ router.delete('/api/notice/:id', noticeController.deleteNotice); // Deletes a po
 
 // Routing for events
 router.post('/api/event', eventController.createEvent); // Creates a new post
-router.put('/api/event/:id/:interest', eventController.updateEventInterest);
+router.put('/api/event/:id/:interest', eventController.updateEventInterest); // Updates interest
 router.delete('/api/event/:id', eventController.deleteEvent); // Deletes a post
 
 // Routing for favors
