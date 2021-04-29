@@ -6,7 +6,8 @@
   "scripts": {
     "install": "cd ./client && npm i . && cd ../server && npm i .",
     "commit": "cz",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,8 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^23.0.0",
     "load-grunt-tasks": "^5.1.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "husky": "^6.0.0"
   },
   "config": {
     "commitizen": {
