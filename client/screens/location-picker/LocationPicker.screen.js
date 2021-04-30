@@ -6,7 +6,7 @@ import * as Location from 'expo-location';
 
 import MapPreview from '../../components/map-preview/MapPreview.component';
 
-import backIcon from '../../assets/button-icons/back-icon.png';
+//import backIcon from '../../assets/button-icons/back-icon.png';
 
 export default function LocationPicker(props) {
   const [isFetching, setIsFetching] = useState(true);
@@ -88,7 +88,7 @@ export default function LocationPicker(props) {
         </TouchableOpacity>
         {hasLocation && (
           <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
-            <Image source={backIcon} style={{ width: 40, height: 40 }} />
+            <Image source={'backIcon'} style={{ width: 40, height: 40 }} />
           </TouchableOpacity>
         )}
       </View>

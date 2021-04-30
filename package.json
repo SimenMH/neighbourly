@@ -8,7 +8,7 @@
     "commit": "cz",
     "start:server": "node ./server",
     "start:client": "cd ./client && BROWSER=none npm start && cd ..",
-    "start:server-client": "start-test start:server 3001/events start:client",
+    "start:server-client": "start-test start:server 3001 start:client",
     "test": "cypress run",
     "test:open": "cypress open",
     "test:ci": "start-test start:server-client 19002 test",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "^7.0.6",
+    "@testing-library/react-native": "^7.2.0",
     "babel-eslint": "^10.1.0",
     "cypress": "^7.2.0",
     "cz-conventional-changelog": "^3.3.0",
