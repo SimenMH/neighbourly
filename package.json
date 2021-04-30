@@ -6,7 +6,12 @@
   "scripts": {
     "install": "cd ./client && npm i . && cd ../server && npm i .",
     "commit": "cz",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "node ./server",
+    "start:client": "cd ./client && BROWSER=none npm start && cd ..",
+    "start:server-client": "start-test start:server 3001/events start:client",
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:ci": "start-test start:server-client 19002 test",
     "prepare": "husky install"
   },
   "repository": {
@@ -23,7 +28,9 @@
     "commitizen": "^4.2.3"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^7.0.6",
     "babel-eslint": "^10.1.0",
+    "cypress": "^7.2.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
@@ -38,9 +45,10 @@
     "grunt": "^1.4.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^23.0.0",
+    "husky": "^6.0.0",
     "load-grunt-tasks": "^5.1.0",
     "prettier": "^2.2.1",
-    "husky": "^6.0.0"
+    "start-server-and-test": "^1.12.1"
   },
   "config": {
     "commitizen": {
