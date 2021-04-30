@@ -9,12 +9,12 @@ module.exports = function (grunt) {
         configFile: '.eslintrc.json',
         fix: true,
       },
-      target: ['index.js', 'Gruntfile.js', 'controllers/*.js', 'helpers/*.js', 'models/*.js']
+      target: ['index.js', 'Gruntfile.js', 'controllers/*.js', 'helpers/*.js', 'models/*.js', 'router.js']
     },
     watch: {
       files: [
         'index.js', 
-        'Gruntfile.js', 'controllers/*.js', 'helpers/*.js', 'models/*.js',
+        'Gruntfile.js', 'controllers/*.js', 'helpers/*.js', 'models/*.js', 'router.js',
         '.eslintrc.json',
       ], 
       tasks: ['eslint'],

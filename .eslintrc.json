@@ -1,0 +1,39 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "ignorePatterns": [
+      "node_modules/*.js",
+      "cypress/*"
+    ],
+    "rules": {
+        "indent": [
+          "error",
+          2
+        ],
+        "no-unused-vars": [
+          1,
+          {
+            "ignoreRestSiblings": true
+          }
+        ],
+        "keyword-spacing": "error",
+        "linebreak-style": "error",
+        "quotes": [
+          "error",
+          "single"
+        ],
+        "semi": "error",
+        "space-before-blocks": "error",
+        // "space-before-function-paren": "error",
+        "no-undef": "off"
+    }
+}
