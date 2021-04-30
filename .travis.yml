@@ -1,6 +1,5 @@
 language: node_js
 node_js: 'node'
-before_script: 'npx eslint -c .eslintrc.json --fix'
 cache:
   directories:
     - node_modules
