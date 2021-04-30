@@ -10,7 +10,7 @@ This project was developed in just 6 days for my [Codeworks](https://codeworks.m
 
 ## Screenshots
 
-<img src="https://i.imgur.com/tbJTsbT.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/0urouiL.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/SFoEhBi.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/ptFjASC.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/y2XyTvF.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/fmLxcUr.jpg" style="zoom:15%;" /><img src="https://i.imgur.com/ShIpanU.jpg" style="zoom:15%;" />
+![](https://i.imgur.com/iWViYDK.jpg)![](https://i.imgur.com/LO7TsR8.jpg)![](https://i.imgur.com/EEoi0YM.jpg)![](https://i.imgur.com/4tqQmu0.jpg)![](https://i.imgur.com/BLZdD2A.jpg)![](https://i.imgur.com/q1vy656.jpg)![](https://i.imgur.com/3WesH9y.jpg)
 
 ## Before you start
 
