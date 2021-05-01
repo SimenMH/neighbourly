@@ -21,7 +21,7 @@ export default function LocationPicker(props) {
   const [pickedLocation, setPickedLocation] = useState();
   const [hasLocation, setHasLocation] = useState(false);
 
-  export const verifyPermissions = async () => {
+  const verifyPermissions = async () => {
     setIsFetching(true);
     const result = await Location.requestForegroundPermissionsAsync();
     if (result.status !== 'granted') {
@@ -110,7 +110,10 @@ export default function LocationPicker(props) {
           <Text style={styles.barButton}>Confirm</Text>
         </TouchableOpacity>
         {hasLocation && (
-          <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
+          <TouchableOpacity
+            onPress={() => props.navigation.goBack()}
+            activeOpacity={0.5}
+          >
             <Image source={'backIcon'} style={{ width: 40, height: 40 }} />
           </TouchableOpacity>
         )}
