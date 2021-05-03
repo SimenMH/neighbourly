@@ -69,60 +69,52 @@ describe('BottomBar component', () => {
     expect(changeScreen).toHaveBeenCalledWith(destinationScreen);
     expect(navigateNewPost).toHaveBeenCalledTimes(1);
   });
-  test('home screen image opacity should be at 1', () => {
+  test('home icon image opacity should be at 1', () => {
     const destinationScreen = 'home';
-    const testID = destinationScreen;
-    const renderedComponent = render(
-      <BottomBar
-        navigateNewPost={() => navigateNewPost()}
-        changeScreen={() => goTo(destinationScreen)}
-        screen={destinationScreen}
-      />
-    );
-    fireEvent.press(renderedComponent.getByTestId(testID));
-    const imageComponent = renderedComponent.getByTestId(testID);
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('homeIcon');
     expect(imageComponent.props.style.opacity).toBe(1);
   });
-  test('notice screen image opacity should be at 1', () => {
-    const destinationScreen = 'notice';
-    const testID = destinationScreen;
-    const renderedComponent = render(
-      <BottomBar
-        navigateNewPost={() => navigateNewPost()}
-        changeScreen={() => goTo(destinationScreen)}
-        screen={destinationScreen}
-      />
-    );
-    fireEvent.press(renderedComponent.getByTestId(testID));
-    const imageComponent = renderedComponent.getByTestId(testID);
-    expect(imageComponent.props.style.opacity).toBe(1);
-  });
-  test('event screen image opacity should be at 1', () => {
-    const destinationScreen = 'event';
-    const testID = destinationScreen;
-    const renderedComponent = render(
-      <BottomBar
-        navigateNewPost={() => navigateNewPost()}
-        changeScreen={() => goTo(destinationScreen)}
-        screen={destinationScreen}
-      />
-    );
-    fireEvent.press(renderedComponent.getByTestId(testID));
-    const imageComponent = renderedComponent.getByTestId(testID);
-    expect(imageComponent.props.style.opacity).toBe(1);
-  });
-  test('favor screen image opacity should be at 1', () => {
+  test('home icon image opacity should be at 0.5', () => {
     const destinationScreen = 'favor';
-    const testID = destinationScreen;
-    const renderedComponent = render(
-      <BottomBar
-        navigateNewPost={() => navigateNewPost()}
-        changeScreen={() => goTo(destinationScreen)}
-        screen={destinationScreen}
-      />
-    );
-    fireEvent.press(renderedComponent.getByTestId(testID));
-    const imageComponent = renderedComponent.getByTestId(testID);
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('homeIcon');
+    expect(imageComponent.props.style.opacity).toBe(0.5);
+  });
+  test('notice icon image opacity should be at 1', () => {
+    const destinationScreen = 'notice';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('noticeIcon');
     expect(imageComponent.props.style.opacity).toBe(1);
+  });
+  test('notice icon image opacity should be at 0.5', () => {
+    const destinationScreen = 'favor';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('noticeIcon');
+    expect(imageComponent.props.style.opacity).toBe(0.5);
+  });
+  test('event icon image opacity should be at 1', () => {
+    const destinationScreen = 'event';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('eventIcon');
+    expect(imageComponent.props.style.opacity).toBe(1);
+  });
+  test('event icon image opacity should be at 0.5', () => {
+    const destinationScreen = 'favor';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('eventIcon');
+    expect(imageComponent.props.style.opacity).toBe(0.5);
+  });
+  test('favor icon opacity should be at 1', () => {
+    const destinationScreen = 'favor';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('favorIcon');
+    expect(imageComponent.props.style.opacity).toBe(1);
+  });
+  test.only('favor icon image opacity should be at 0.5', () => {
+    const destinationScreen = 'home';
+    const renderedComponent = render(<BottomBar screen={destinationScreen} />);
+    const imageComponent = renderedComponent.getByTestId('favorIcon');
+    expect(imageComponent.props.style.opacity).toBe(0.5);
   });
 });
