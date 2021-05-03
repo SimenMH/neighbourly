@@ -15,7 +15,12 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
       <View style={styles.bottomBar}>
         <View style={styles.buttonContainer}>
           <View style={styles.innerButtonContainer}>
-            <TouchableOpacity style={styles.iconButton} onPress={() => goTo('home')} activeOpacity={0.8}>
+            <TouchableOpacity
+              testID='home'
+              style={styles.iconButton}
+              onPress={() => goTo('home')}
+              activeOpacity={0.8}
+            >
               <Image
                 source={homeIcon}
                 style={{
