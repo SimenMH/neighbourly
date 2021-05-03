@@ -15,6 +15,7 @@ export default function PostList(props) {
   return (
     <View style={styles.container}>
       <FlatList
+        testID="list"
         data={props.posts}
         renderItem={({ item }) => (
           <Post

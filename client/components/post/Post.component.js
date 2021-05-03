@@ -91,6 +91,7 @@ export default function Post(props) {
           <View style={styles.topContainer}>
             <Text style={styles.timestamp}>{formatTime()}</Text>
             <TouchableOpacity
+              testID="options"
               style={{ padding: 5 }}
               onPress={() => props.handlePostOptions(post._id, props.type, post.allowMessages)}
             >
