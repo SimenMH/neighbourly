@@ -22,6 +22,7 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
               activeOpacity={0.8}
             >
               <Image
+                testID='homeIcon'
                 source={homeIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -36,6 +37,7 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
               activeOpacity={0.8}
             >
               <Image
+                testID='noticeIcon'
                 source={noticeIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -52,6 +54,7 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
               activeOpacity={0.8}
             >
               <Image
+                testID='eventIcon'
                 source={eventIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -66,6 +69,7 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
               activeOpacity={0.8}
             >
               <Image
+                testID='favorIcon'
                 source={favorIcon}
                 style={{
                   ...styles.iconButtonImage,
