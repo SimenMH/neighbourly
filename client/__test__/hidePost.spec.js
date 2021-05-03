@@ -11,26 +11,31 @@ describe('Post', () => {
   it('should render a modal', async () => {
     const handlePostOptions = jest.fn();
     const props = { handlePostOptions, type: 'favor', post: {}, color: '' };
-    render(<Main />);
-    const postOptions = await screen.findByTestId('options');
-    console.log('postOptions.firstChild :>> ', postOptions);
+    //render(<Main />);
+    //const postOptions = await screen.findByTestId('options');
+    //console.log('postOptions.firstChild :>> ', postOptions);
     const postRender = render(<Post {...props} />); 
     const button = await postRender.findByTestId('options');
     //console.log('button :>> ', button);
     fireEvent.press(button);
-    await waitFor(() => expect(postOptions).toBeTruthy());
+    expect(handlePostOptions).toHaveBeenCalledTimes(1);
   });
   
-  it('should hide the modal', () => {});
+  it('should hide the modal', async () => {
+    const setPostOptions = jest.fn();
+    const props = { postOptions: { visible: true }, setPostOptions };
+    const postOptionsRender = render(<PostOptions {...props} />);
+    const button = await postOptionsRender.findByText('CANCEL');
+    fireEvent.press(button);
+    expect(setPostOptions).toHaveBeenCalledTimes(1);
+  });
 
   it('should hide a post', async () => {
-    const onPressMock = jest.fn();
-    const props = { postOptions: { visible: true }, hidePost: onPressMock };
-    const postOptionsRender = render(
-      <PostOptions {...props} />
-    );
+    const hidePost = jest.fn();
+    const props = { postOptions: { visible: true }, hidePost };
+    const postOptionsRender = render(<PostOptions {...props} />);
     const optionButton = postOptionsRender.getByText('Hide this post');
-    //console.log('optionButton :>> ', optionButton);
     fireEvent.press(optionButton);
+    expect(hidePost).toHaveBeenCalledTimes(1);
   });
 });
