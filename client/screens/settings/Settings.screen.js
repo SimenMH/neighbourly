@@ -31,14 +31,19 @@ export default function Settings({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.8}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          activeOpacity={0.8}
+        >
           <Image source={backIcon} style={{ width: 40, height: 40 }} />
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.settingsContainer}>
-          {renderOption('Change Location', () => navigation.navigate('LocationPicker'))}
+          {renderOption('Change Location', () =>
+            navigation.navigate('LocationPicker')
+          )}
           <View style={styles.lineBreak}></View>
           {renderOption('Reset Hidden Posts', resetHiddenPosts)}
           <View style={styles.lineBreak}></View>

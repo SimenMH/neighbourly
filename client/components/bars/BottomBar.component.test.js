@@ -8,64 +8,64 @@ describe('BottomBar component', () => {
   const goTo = jest.fn((screen) => changeScreen(screen));
   test('goes to home screen', () => {
     const testID = 'home';
-    const BottomBarComp = render(
+    const renderedComponent = render(
       <BottomBar
         navigateNewPost={() => navigateNewPost()}
         changeScreen={() => goTo(testID)}
         screen={testID}
       />
     );
-    fireEvent.press(BottomBarComp.getByTestId(testID));
+    fireEvent.press(renderedComponent.getByTestId(testID));
     expect(changeScreen).toHaveBeenCalledWith(testID);
   });
   test('goes to notice screen', () => {
     const testID = 'notice';
-    const BottomBarComp = render(
+    const renderedComponent = render(
       <BottomBar
         navigateNewPost={() => navigateNewPost()}
         changeScreen={() => goTo(testID)}
         screen={testID}
       />
     );
-    fireEvent.press(BottomBarComp.getByTestId(testID));
+    fireEvent.press(renderedComponent.getByTestId(testID));
     expect(changeScreen).toHaveBeenCalledWith(testID);
   });
   test('goes to notice event', () => {
     const testID = 'event';
-    const BottomBarComp = render(
+    const renderedComponent = render(
       <BottomBar
         navigateNewPost={() => navigateNewPost()}
         changeScreen={() => goTo(testID)}
         screen={testID}
       />
     );
-    fireEvent.press(BottomBarComp.getByTestId(testID));
+    fireEvent.press(renderedComponent.getByTestId(testID));
     expect(changeScreen).toHaveBeenCalledWith(testID);
   });
   test('goes to notice favor', () => {
     const testID = 'favor';
-    const BottomBarComp = render(
+    const renderedComponent = render(
       <BottomBar
         navigateNewPost={() => navigateNewPost()}
         changeScreen={() => goTo(testID)}
         screen={testID}
       />
     );
-    fireEvent.press(BottomBarComp.getByTestId(testID));
+    fireEvent.press(renderedComponent.getByTestId(testID));
     expect(changeScreen).toHaveBeenCalledWith(testID);
   });
   test('navigates to new post', () => {
     const navigateNewPost = jest.fn();
     const testID = 'navigateNewPost';
     const destinationScreen = 'favor';
-    const BottomBarComp = render(
+    const renderedComponent = render(
       <BottomBar
         navigateNewPost={() => navigateNewPost()}
         changeScreen={() => goTo(destinationScreen)}
         screen={destinationScreen}
       />
     );
-    fireEvent.press(BottomBarComp.getByTestId(testID));
+    fireEvent.press(renderedComponent.getByTestId(testID));
     expect(changeScreen).toHaveBeenCalledWith(destinationScreen);
     expect(navigateNewPost).toHaveBeenCalledTimes(1);
   });
@@ -111,7 +111,7 @@ describe('BottomBar component', () => {
     const imageComponent = renderedComponent.getByTestId('favorIcon');
     expect(imageComponent.props.style.opacity).toBe(1);
   });
-  test.only('favor icon image opacity should be at 0.5', () => {
+  test('favor icon image opacity should be at 0.5', () => {
     const destinationScreen = 'home';
     const renderedComponent = render(<BottomBar screen={destinationScreen} />);
     const imageComponent = renderedComponent.getByTestId('favorIcon');
