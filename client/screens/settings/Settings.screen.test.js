@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import Settings from '../settings/Settings.screen';
-import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
-
-jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
+import Main from '../../screens/main/Main.screen';
 
 describe('Settings component', () => {
-  test.only('navigates to LocationPicker scren component', () => {
+  test('navigates to LocationPicker screen component', () => {
     const navigation = {};
     navigation.navigate = jest.fn();
     const { getByText } = render(<Settings navigation={navigation} />);
