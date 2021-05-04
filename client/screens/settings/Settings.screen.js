@@ -16,10 +16,13 @@ export default function Settings({ navigation }) {
       console.error(err);
     }
   };
-
   const renderOption = (text, onPressHandler) => {
     return (
-      <TouchableOpacity onPress={onPressHandler} activeOpacity={0.8}>
+      <TouchableOpacity
+        testID={text}
+        onPress={onPressHandler}
+        activeOpacity={0.8}
+      >
         <View style={styles.optionButton}>
           <Text style={styles.optionText}>{text}</Text>
           <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
