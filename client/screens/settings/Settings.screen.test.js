@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import Settings from './Settings.screen';
-import Main from '../main/Main.screen';
 
 describe('Settings component', () => {
   test('navigates to LocationPicker screen component', () => {
