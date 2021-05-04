@@ -83,6 +83,7 @@ export default function NewPost({ navigation, route }) {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           activeOpacity={0.5}
+          testID='btn-back-icon'
         >
           <Image source={backIcon} style={{ width: 40, height: 40 }} />
         </TouchableOpacity>
