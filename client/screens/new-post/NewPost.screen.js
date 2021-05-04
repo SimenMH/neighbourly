@@ -29,8 +29,8 @@ export default function NewPost({ navigation, route }) {
 
   useEffect(() => {
     // Get the number of linebreaks and update the lineBreaks state
-    const lb = text.split('\n');
-    setLineBreaks(lb.length - 1);
+    const lineBreak = text.split('\n');
+    setLineBreaks(lineBreak.length - 1);
   }, [text]);
 
   const postIt = async () => {
