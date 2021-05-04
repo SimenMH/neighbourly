@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, Modal, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  Alert
+} from 'react-native';
 import { styles } from './styles';
 import CalendarPicker from 'react-native-calendar-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -71,7 +80,10 @@ export default function NewPost({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.5}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          activeOpacity={0.5}
+        >
           <Image source={backIcon} style={{ width: 40, height: 40 }} />
         </TouchableOpacity>
 
@@ -87,7 +99,7 @@ export default function NewPost({ navigation, route }) {
               selectedStartDate={selectedDate}
               startFromMonday={true}
               minDate={new Date()}
-              onDateChange={date => setSelectedDate(date)}
+              onDateChange={(date) => setSelectedDate(date)}
               height={325}
               width={350}
               textStyle={{ fontWeight: 'bold' }}
@@ -120,7 +132,9 @@ export default function NewPost({ navigation, route }) {
           scrollEnabled={true}
           maxLength={345 - lineBreaks * 23} // For each linebreak, decrease the max length by 23
           onChangeText={setText}
-          placeholder={'Share some thoughts or ideas to the neighbours around you.'}
+          placeholder={
+            'Share some thoughts or ideas to the neighbours around you.'
+          }
         />
       </ScrollView>
       {!editIdentity ? (
@@ -168,7 +182,11 @@ export default function NewPost({ navigation, route }) {
               </View>
             </TouchableOpacity>
           )}
-          {type === 'event' && <Text style={styles.dateText}>{moment(eventDate).format('D MMM')}</Text>}
+          {type === 'event' && (
+            <Text style={styles.dateText}>
+              {moment(eventDate).format('D MMM')}
+            </Text>
+          )}
         </View>
       ) : (
         <View style={styles.optionsContainer}>
@@ -178,7 +196,10 @@ export default function NewPost({ navigation, route }) {
             activeOpacity={0.8}
           >
             <View style={styles.iconContainer}>
-              <Image source={checkIcon} style={{ ...styles.buttonIcons, opacity: 0.6 }} />
+              <Image
+                source={checkIcon}
+                style={{ ...styles.buttonIcons, opacity: 0.6 }}
+              />
             </View>
           </TouchableOpacity>
 
@@ -187,7 +208,7 @@ export default function NewPost({ navigation, route }) {
               style={styles.identityInput}
               maxLength={16}
               placeholder={'e.g. John, 221B'}
-              onChangeText={val => setIdentity(val)}
+              onChangeText={(val) => setIdentity(val)}
               defaultValue={identity}
             />
           </View>
