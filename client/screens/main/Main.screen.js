@@ -172,7 +172,7 @@ export default function Main({ navigation }) {
         changeScreen={newScreen => goTo(newScreen)}
       />
       <PostOptions
-        data-testid="options"
+        data-testid="modal"
         postOptions={postOptions}
         handleResolveFavor={() => handleResolveFavor()}
         handleDeletePost={() => handleDeletePost()}
