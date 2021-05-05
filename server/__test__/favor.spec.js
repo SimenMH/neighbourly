@@ -4,7 +4,7 @@ const db = require('../models/index.js');
 const Favor = require('../models/favor');
 const app = require('../index');
 
-describe('Name of the group', () => {
+describe('Favor', () => {
 
   const request = supertest(app);
   let body;
@@ -47,7 +47,7 @@ describe('Name of the group', () => {
     done();
   });
 
-  it('should save a favor to the database', async (done) => {
+  it('should resolve a favor and save it to the database', async (done) => {
     const { _id } = await Favor.findOne({ content: body.content });
     await request.put(`/api/favor/${_id}`);
     const favor = await Favor.findOne({ content: body.content });
