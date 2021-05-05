@@ -16,18 +16,20 @@ async function getAll(ctx) {
     const events = await Event.find();
     const favors = await Favor.find();
 
-    const filteredArr = [posts, notices, events, favors].map(arr => {
-      return arr
-        .filter(notice => {
-          // Filters out any post further than the max distance
-          const distance = measureDistance.distanceInMeters(pos, {
-            lat: notice.latitude,
-            lon: notice.longitude
-          });
-          return distance <= maxDist;
-        })
-        .reverse();
-    });
+    const filteredArr = [posts, notices, events, favors]
+      .map((arr) => {
+        return arr
+          .filter((notice) => {
+            // Filters out any post further than the max distance
+            const distance = measureDistance.distanceInMeters(pos, {
+              lat: notice.latitude,
+              lon: notice.longitude
+            });
+            return distance <= maxDist;
+          })
+          .reverse();
+      })
+      .map((arr) => arr.slice().sort((a, b) => a.createdAt > b.createdAt));
 
     const allObj = {
       home: filteredArr[0],
