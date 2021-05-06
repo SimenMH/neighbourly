@@ -11,9 +11,13 @@ async function getAll(ctx) {
     let pos = ctx.params.pos.split(',');
     pos = { lat: parseFloat(pos[0]), lon: parseFloat(pos[1]) };
 
+    const now = new Date();
+    const [day, month, year] = [now.getDate(), now.getMonth(), now.getFullYear()];
+    const today = new Date(year, month, day).toISOString();
+
     const posts = await Post.find();
     const notices = await Notice.find();
-    const events = await Event.find();
+    const events = (await Event.find()).filter((e) => today <= e.eventDate);;
     const favors = await Favor.find();
 
     const filteredArr = [posts, notices, events, favors]

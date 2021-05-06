@@ -1,23 +1,9 @@
-'use strict';
-const koa = require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('./router');
-const cors = require('@koa/cors');
+const app = require('./app');
 const db = require('./models/index.js');
-
-const app = new koa();
-
 const PORT = 3001;
 
-app.use(cors());
+db.connectDB('neighbourlydb').then(console.log('Connected to Mongoose'));
 
-app.use(bodyParser());
-app.use(router.routes());
-
-db.connectDB().then(console.log('Connected to Mongoose'));
-
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/ 🚀`);
 });
-
-module.exports = server;

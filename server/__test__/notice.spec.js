@@ -2,15 +2,14 @@
 const supertest = require('supertest');
 const db = require('../models/index.js');
 const Notice = require('../models/notice');
-const app = require('../index');
+const app = require('../app');
 
 describe('Notice', () => {
-  const request = supertest(app);
+  const request = supertest(app.callback());
   let body;
 
   beforeAll(async () => {
-    await db.connectDB();
-    console.log('Connected to Mongoose');
+    await db.connectDB('neighbourlydb__test');
   });
 
   beforeEach(async () => {

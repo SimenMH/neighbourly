@@ -77,7 +77,10 @@ export default function Post(props) {
       <View style={{ minHeight: 115 }}>
         {props.type === 'favor' && post.resolved && (
           <View style={styles.resolved}>
-            <Image source={favorResolved} style={{ height: 100, width: 100, opacity: 0.4 }} />
+            <Image
+              source={favorResolved}
+              style={{ height: 100, width: 100, opacity: 0.4 }}
+            />
           </View>
         )}
         <View style={styles.pinContainer}>
@@ -91,9 +94,15 @@ export default function Post(props) {
           <View style={styles.topContainer}>
             <Text style={styles.timestamp}>{formatTime()}</Text>
             <TouchableOpacity
-              testID="options"
+              testID='options'
               style={{ padding: 5 }}
-              onPress={() => props.handlePostOptions(post._id, props.type, post.allowMessages)}
+              onPress={() =>
+                props.handlePostOptions(
+                  post._id,
+                  props.type,
+                  post.allowMessages
+                )
+              }
             >
               <View style={styles.settings}>
                 <View style={styles.settingsDot}></View>
@@ -104,13 +113,19 @@ export default function Post(props) {
           </View>
           <Text style={styles.content}>{post.content}</Text>
         </View>
-        {post.identifier ? <Text style={styles.identifier}>-{post.identifier}</Text> : null}
+        {post.identifier ? (
+          <Text style={styles.identifier}>-{post.identifier}</Text>
+        ) : null}
       </View>
       {props.type === 'event' && (
         <View style={styles.eventInfo}>
-          <Text style={styles.eventText}>Date: {moment(post.eventDate).format('D MMM YYYY')}</Text>
+          <Text style={styles.eventText}>
+            Date: {moment(post.eventDate).format('D MMM YYYY')}
+          </Text>
           <View style={styles.interestContainer}>
-            <Text style={styles.eventText}>{post.interest} people are interested</Text>
+            <Text style={styles.eventText}>
+              {post.interest} people are interested
+            </Text>
             <View>
               <TouchableOpacity
                 style={styles.interestButton}
@@ -122,7 +137,10 @@ export default function Post(props) {
                   {fetchingInterest ? (
                     <ActivityIndicator size={15} color={'white'} />
                   ) : (
-                    <Image source={interested ? checkIcon : plusIcon} style={styles.buttonIcon} />
+                    <Image
+                      source={interested ? checkIcon : plusIcon}
+                      style={styles.buttonIcon}
+                    />
                   )}
                 </View>
               </TouchableOpacity>

@@ -49,6 +49,18 @@ export const resolveFavor = (id) => {
     .catch((err) => console.error(err));
 };
 
+export const upVote = (id, type) => {
+  return fetch(`${baseUrl}/${type}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((res) => res.json())
+    .then((favor) => favor)
+    .catch((err) => console.error(err));
+};
+
 export const deletePost = (id, type) => {
   if (type === 'home') type = 'post';
   return fetch(`${baseUrl}/${type}/${id}`, {

@@ -27,6 +27,24 @@ async function resolveFavor(ctx) {
   }
 }
 
+
+async function upVoteFavor(ctx) {
+  try {
+    const { id } = ctx.params;
+    const favor = await Favor.findOneAndUpdate(
+      { _id: id },
+      { $inc: { vote: 1 } },
+      { new: true }
+    );
+
+    ctx.body = favor;
+    ctx.status = 201;
+  } catch (err) {
+    console.log(err);
+    ctx.status = 500;
+  }
+}
+
 async function deleteFavor(ctx) {
   try {
     const { id } = ctx.params;
@@ -38,4 +56,4 @@ async function deleteFavor(ctx) {
   }
 }
 
-module.exports = { createFavor, resolveFavor, deleteFavor };
+module.exports = { createFavor, resolveFavor, deleteFavor, upVoteFavor };

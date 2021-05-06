@@ -2,16 +2,14 @@
 const supertest = require('supertest');
 const db = require('../models/index.js');
 const Favor = require('../models/favor');
-const app = require('../index');
-
+const app = require('../app');
 describe('Favor', () => {
 
-  const request = supertest(app);
+  const request = supertest(app.callback());
   let body;
 
   beforeAll(async () => {
-    await db.connectDB();
-    console.log('Connected to Mongoose');
+    await db.connectDB('neighbourlydb__test');
   });
 
   beforeEach(async () => {
@@ -42,7 +40,6 @@ describe('Favor', () => {
     const { _id } = await Favor.findOne({ content: body.content });
     await request.delete(`/api/favor/${_id}`);
     const favors = await Favor.find();
-
     expect(favors.length).toBe(1);
     done();
   });
