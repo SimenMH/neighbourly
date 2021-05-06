@@ -9,6 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 jest.mock('expo-location');
 jest.mock('@react-native-async-storage/async-storage');
 
+// Not working
+//TODO: mock the expo-location
 describe('Location', () => {
   
   it('find the location', async () => {

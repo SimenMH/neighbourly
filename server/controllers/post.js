@@ -12,7 +12,7 @@ async function createPost(ctx) {
 }
 
 async function upVotePost(ctx) {
-  try {
+  try { 
     const { id } = ctx.params;
     const favor = await Post.findOneAndUpdate(
       { _id: id },

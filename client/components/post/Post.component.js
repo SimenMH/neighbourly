@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
 import { styles } from './styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { updateInterest } from '../../services/ApiService.service';
+import { updateInterest, upVote } from '../../services/ApiService.service';
 import moment from 'moment'; // Alternatives: DayJS or date-fns
 
 import paperBackground from '../../assets/paper-texture01.jpg';
@@ -29,7 +36,9 @@ export default function Post(props) {
     try {
       await updateInterest(post._id, !interested);
 
-      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      let interestedEvents = await AsyncStorage.getItem(
+        '@neighbourly_interested'
+      );
       if (interestedEvents) interestedEvents = JSON.parse(interestedEvents);
       else interestedEvents = [];
 
@@ -37,11 +46,14 @@ export default function Post(props) {
         interestedEvents.push(post._id);
         post.interest += 1;
       } else {
-        interestedEvents = interestedEvents.filter(id => id !== post._id);
+        interestedEvents = interestedEvents.filter((id) => id !== post._id);
         post.interest -= 1;
       }
       // Always stringify before saving to storage. AsyncStorage expects a string
-      await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
+      await AsyncStorage.setItem(
+        '@neighbourly_interested',
+        JSON.stringify(interestedEvents)
+      );
 
       setInterested(!interested);
     } catch (err) {
@@ -54,7 +66,9 @@ export default function Post(props) {
   const fetchInterest = async () => {
     setFetchingInterest(true);
     try {
-      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      let interestedEvents = await AsyncStorage.getItem(
+        '@neighbourly_interested'
+      );
       if (interestedEvents) {
         interestedEvents = JSON.parse(interestedEvents);
         if (interestedEvents.includes(post._id)) setInterested(true);
@@ -112,6 +126,12 @@ export default function Post(props) {
             </TouchableOpacity>
           </View>
           <Text style={styles.content}>{post.content}</Text>
+          {props.type !== 'event' && <TouchableOpacity
+            onPress={() => upVote(post._id, props.type)}
+            style={styles.voteButtonContainer}
+          >
+            <Text style={styles.voteButtonText}>{post.vote}</Text>
+          </TouchableOpacity>}
         </View>
         {post.identifier ? (
           <Text style={styles.identifier}>-{post.identifier}</Text>

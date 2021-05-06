@@ -49,8 +49,10 @@ export const resolveFavor = (id) => {
     .catch((err) => console.error(err));
 };
 
+//TODO: automatically refresh the screen after a vote 
 export const upVote = (id, type) => {
-  return fetch(`${baseUrl}/${type}/${id}`, {
+  if (type === 'home') type = 'post';
+  return fetch(`${baseUrl}/${type}/${id}/vote`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'

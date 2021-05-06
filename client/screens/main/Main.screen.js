@@ -144,7 +144,7 @@ export default function Main({ navigation }) {
   useEffect(() => {
     checkForUser();
   }, []);
-
+  
   return (
     <View style={styles.container}>
       <TopBar navigateSettings={navigateSettings} />

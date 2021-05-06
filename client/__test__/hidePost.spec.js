@@ -43,6 +43,7 @@ describe('Post', () => {
     expect(hiddenPosts.length).toBe(1);
   });
 
+  //TODO: reset hidden post
   it('should show all the posts', async () => {
     const showPosts = jest.fn(async () => {
       await AsyncStorage.removeItem('@neighbourly_hidden');
@@ -52,9 +53,9 @@ describe('Post', () => {
     const button = settingsRender.getByText('Reset Hidden Posts');
     fireEvent.press(button, showPosts);
     const posts = await AsyncStorage.getItem('@neighbourly_hidden');
-    console.log('Object.keys(button) :>> ', Object.keys(button));
-    console.log('button.props :>> ', button.props);
-    console.log('button.updater :>> ', button.updater);
+    //console.log('Object.keys(button) :>> ', Object.keys(button));
+    //console.log('button.props :>> ', button.props);
+    //console.log('button.updater :>> ', button.updater);
     //expect(showPosts).toHaveBeenCalledTimes(2);
   });
 });
