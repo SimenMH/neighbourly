@@ -29,13 +29,10 @@ git clone https://github.com/SimenMH/neighbourly
 ```
 
 3. Install dependencies for both client and server folders
-
-Client:
 ```
 cd client
 npm install
 ```
-Server:
 ```
 cd server
 npm install
@@ -43,11 +40,6 @@ npm install
 
 4. Start development server
 
-If you have nodemon installed globally:
-```
-nodemon
-```
-Otherwise:
 ```
 node index.js
 ```
