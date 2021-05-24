@@ -28,30 +28,34 @@ GOOGLE_API_KEY='your API goes here'
 git clone https://github.com/SimenMH/neighbourly
 ```
 
-3. Install dependencies for both client and s
+3. Install dependencies for both client and server folders
 
-```
 Client:
+```
 cd client
-npm install or npm i
+npm install
+```
 Server:
+```
 cd server
-npm install or npm i
+npm install
 ```
 
 4. Start development server
 
-```
 If you have nodemon installed globally:
+```
 nodemon
+```
 Otherwise:
+```
 node index.js
 ```
 
 5. Navigate to client and run the Expo CLI server
 
 ```
-expo start or npm start
+expo start
 ```
 
 6. Open the project on your device or an emulator of your choice
