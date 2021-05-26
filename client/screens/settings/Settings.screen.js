@@ -18,11 +18,15 @@ export default function Settings({ navigation }) {
   };
   const renderOption = (text, onPressHandler) => {
     return (
+<<<<<<< HEAD
       <TouchableOpacity
         testID={text}
         onPress={onPressHandler}
         activeOpacity={0.8}
       >
+=======
+      <TouchableOpacity testID = {text} onPress={onPressHandler} activeOpacity={0.8}>
+>>>>>>> client/tests
         <View style={styles.optionButton}>
           <Text style={styles.optionText}>{text}</Text>
           <Image source={rightArrowIcon} style={{ height: 15, width: 25 }} />
@@ -36,11 +40,11 @@ export default function Settings({ navigation }) {
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          activeOpacity={0.8}
+          activeOpacity={0.8} testID="backButton000"
         >
           <Image source={backIcon} style={{ width: 40, height: 40 }} />
         </TouchableOpacity>
-        <Text style={styles.title}>Settings</Text>
+        <Text testID = "settings__text" style={styles.title}>Settings</Text>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.settingsContainer}>

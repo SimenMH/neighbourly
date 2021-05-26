@@ -20,7 +20,6 @@ import BottomBar from '../components/bars/BottomBar.component';
 //});
 
 it('should render', () => {
-  const { getByTestId, queryByTestId, getByText } = render(<BottomBar />);
   const t = renderer.create(<BottomBar />).toJSON();
   //console.log('t :>> ', t);
 });
