@@ -57,7 +57,7 @@ export default function NewPost({ navigation, route }) {
         if (!authored) authored = '[]';
         authored = JSON.stringify([...JSON.parse(authored), newPost._id]);
         await AsyncStorage.setItem('@neighbourly_authored', authored);
-        authored = await AsyncStorage.getItem('@neighbourly_authored');
+        // authored = await AsyncStorage.getItem('@neighbourly_authored');
 
         navigation.goBack();
         refreshPosts();

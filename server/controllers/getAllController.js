@@ -5,17 +5,17 @@ const Favor = require('../models/favor');
 const measureDistance = require('../helpers/meterDistance');
 
 const maxDist = 150;
-
 async function getAll(ctx) {
+
   try {
     let pos = ctx.params.pos.split(',');
+
     pos = { lat: parseFloat(pos[0]), lon: parseFloat(pos[1]) };
 
     const posts = await Post.find();
     const notices = await Notice.find();
     const events = await Event.find();
     const favors = await Favor.find();
-
     const filteredArr = [posts, notices, events, favors].map(arr => {
       return arr
         .filter(notice => {
