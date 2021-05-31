@@ -17,7 +17,9 @@ This project was developed in just 6 days for my [Codeworks](https://codeworks.m
 Get a free API key from [Google](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 - Add a .env file in the client folder with the following:
+```
 GOOGLE_API_KEY='your API goes here'
+```
 
 ## Getting started
 
