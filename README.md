@@ -4,8 +4,6 @@ Neighbourly is a mobile app that helps neighbours connect and communicate more e
 
 Gone are the days of trying to keep an updated list of all your neighbour's phone numbers or going from door to door to get your message out. 
 
-This project was developed in just 6 days for my [Codeworks](https://codeworks.me/) solo project.
-
 
 
 ## Screenshots
