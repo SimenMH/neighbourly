@@ -1,8 +1,9 @@
 ## About
 
-Neighbourly is a mobile app that helps neighbours connect and communicate more easily by providing an address based message board on their phones.
+Neighbourly is a mobile app that aims to provide an easier and more modernized way of communicating and making plans with your neighbours.
+Helps neighbours stay in touch by providing a neighbourhood-based messaging board and event planner.
 
-Gone are the days of trying to keep an updated list of all your neighbour's phone numbers or going from door to door to get your message out. 
+Gone are the days of trying to keep an updated list of all your neighbour's phone numbers or going from door-to-door to get your message out. 
 
 
 
