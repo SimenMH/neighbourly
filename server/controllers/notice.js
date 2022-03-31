@@ -11,6 +11,23 @@ async function createNotice(ctx) {
   }
 }
 
+async function upVoteNotice(ctx) {
+  try {
+    const { id } = ctx.params;
+    const favor = await Notice.findOneAndUpdate(
+      { _id: id },
+      { $inc: { vote: 1 } },
+      { new: true }
+    );
+
+    ctx.body = favor;
+    ctx.status = 201;
+  } catch (err) {
+    console.log(err);
+    ctx.status = 500;
+  }
+}
+
 async function deleteNotice(ctx) {
   try {
     const { id } = ctx.params;
@@ -22,4 +39,4 @@ async function deleteNotice(ctx) {
   }
 }
 
-module.exports = { createNotice, deleteNotice };
+module.exports = { createNotice, deleteNotice, upVoteNotice };

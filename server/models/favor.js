@@ -18,6 +18,10 @@ const favor = new mongoose.Schema(
       type: Number,
       required: true
     },
+    vote: {
+      type: Number,
+      default: 0
+    },
     identifier: {
       type: String,
       required: false

@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
 import { styles } from './styles';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { updateInterest } from '../../services/ApiService.service';
+import { updateInterest, upVote } from '../../services/ApiService.service';
 import moment from 'moment'; // Alternatives: DayJS or date-fns
 
 import paperBackground from '../../assets/paper-texture01.jpg';
@@ -29,7 +36,9 @@ export default function Post(props) {
     try {
       await updateInterest(post._id, !interested);
 
-      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      let interestedEvents = await AsyncStorage.getItem(
+        '@neighbourly_interested'
+      );
       if (interestedEvents) interestedEvents = JSON.parse(interestedEvents);
       else interestedEvents = [];
 
@@ -37,11 +46,14 @@ export default function Post(props) {
         interestedEvents.push(post._id);
         post.interest += 1;
       } else {
-        interestedEvents = interestedEvents.filter(id => id !== post._id);
+        interestedEvents = interestedEvents.filter((id) => id !== post._id);
         post.interest -= 1;
       }
       // Always stringify before saving to storage. AsyncStorage expects a string
-      await AsyncStorage.setItem('@neighbourly_interested', JSON.stringify(interestedEvents));
+      await AsyncStorage.setItem(
+        '@neighbourly_interested',
+        JSON.stringify(interestedEvents)
+      );
 
       setInterested(!interested);
     } catch (err) {
@@ -54,7 +66,9 @@ export default function Post(props) {
   const fetchInterest = async () => {
     setFetchingInterest(true);
     try {
-      let interestedEvents = await AsyncStorage.getItem('@neighbourly_interested');
+      let interestedEvents = await AsyncStorage.getItem(
+        '@neighbourly_interested'
+      );
       if (interestedEvents) {
         interestedEvents = JSON.parse(interestedEvents);
         if (interestedEvents.includes(post._id)) setInterested(true);
@@ -77,7 +91,10 @@ export default function Post(props) {
       <View style={{ minHeight: 115 }}>
         {props.type === 'favor' && post.resolved && (
           <View style={styles.resolved}>
-            <Image source={favorResolved} style={{ height: 100, width: 100, opacity: 0.4 }} />
+            <Image
+              source={favorResolved}
+              style={{ height: 100, width: 100, opacity: 0.4 }}
+            />
           </View>
         )}
         <View style={styles.pinContainer}>
@@ -91,8 +108,15 @@ export default function Post(props) {
           <View style={styles.topContainer}>
             <Text style={styles.timestamp}>{formatTime()}</Text>
             <TouchableOpacity
+              testID='options'
               style={{ padding: 5 }}
-              onPress={() => props.handlePostOptions(post._id, props.type, post.allowMessages)}
+              onPress={() =>
+                props.handlePostOptions(
+                  post._id,
+                  props.type,
+                  post.allowMessages
+                )
+              }
             >
               <View style={styles.settings}>
                 <View style={styles.settingsDot}></View>
@@ -102,14 +126,26 @@ export default function Post(props) {
             </TouchableOpacity>
           </View>
           <Text style={styles.content}>{post.content}</Text>
+          {props.type !== 'event' && <TouchableOpacity
+            onPress={() => upVote(post._id, props.type)}
+            style={styles.voteButtonContainer}
+          >
+            <Text style={styles.voteButtonText}>{post.vote}</Text>
+          </TouchableOpacity>}
         </View>
-        {post.identifier ? <Text style={styles.identifier}>-{post.identifier}</Text> : null}
+        {post.identifier ? (
+          <Text style={styles.identifier}>-{post.identifier}</Text>
+        ) : null}
       </View>
       {props.type === 'event' && (
         <View style={styles.eventInfo}>
-          <Text style={styles.eventText}>Date: {moment(post.eventDate).format('D MMM YYYY')}</Text>
+          <Text style={styles.eventText}>
+            Date: {moment(post.eventDate).format('D MMM YYYY')}
+          </Text>
           <View style={styles.interestContainer}>
-            <Text style={styles.eventText}>{post.interest} people are interested</Text>
+            <Text style={styles.eventText}>
+              {post.interest} people are interested
+            </Text>
             <View>
               <TouchableOpacity
                 style={styles.interestButton}
@@ -121,7 +157,10 @@ export default function Post(props) {
                   {fetchingInterest ? (
                     <ActivityIndicator size={15} color={'white'} />
                   ) : (
-                    <Image source={interested ? checkIcon : plusIcon} style={styles.buttonIcon} />
+                    <Image
+                      source={interested ? checkIcon : plusIcon}
+                      style={styles.buttonIcon}
+                    />
                   )}
                 </View>
               </TouchableOpacity>

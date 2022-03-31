@@ -13,7 +13,7 @@ export default function PostOptions(props) {
   };
 
   return (
-    <Modal visible={props.postOptions.visible} transparent={true}>
+    <Modal visible={props.postOptions.visible} transparent={true} testID='modal'>
       <View style={styles.modalContainer}>
         <View style={styles.optionsContainer}>
           {props.postOptions.author ? (

@@ -7,7 +7,7 @@ import eventIcon from '../../assets/button-icons/event-icon.png';
 import favorIcon from '../../assets/button-icons/favor-icon.png';
 
 export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
-  const goTo = screen => changeScreen(screen);
+  const goTo = (screen) => changeScreen(screen);
 
   // TODO: Could try to make these buttons a function that returns a reusable component instead. But watch out for the margins on the Notice and Event buttons
   return (
@@ -15,8 +15,14 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
       <View style={styles.bottomBar}>
         <View style={styles.buttonContainer}>
           <View style={styles.innerButtonContainer}>
-            <TouchableOpacity style={styles.iconButton} onPress={() => goTo('home')} activeOpacity={0.8}>
+            <TouchableOpacity
+              testID='home'
+              style={styles.iconButton}
+              onPress={() => goTo('home')}
+              activeOpacity={0.8}
+            >
               <Image
+                testID='homeIcon'
                 source={homeIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -25,11 +31,13 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
               />
             </TouchableOpacity>
             <TouchableOpacity
+              testID='notice'
               style={[styles.iconButton, { marginRight: 30 }]}
               onPress={() => goTo('notice')}
               activeOpacity={0.8}
             >
               <Image
+                testID='noticeIcon'
                 source={noticeIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -40,11 +48,13 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
           </View>
           <View style={styles.innerButtonContainer}>
             <TouchableOpacity
+              testID='event'
               style={[styles.iconButton, { marginLeft: 30 }]}
               onPress={() => goTo('event')}
               activeOpacity={0.8}
             >
               <Image
+                testID='eventIcon'
                 source={eventIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -52,8 +62,14 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
                 }}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton} onPress={() => goTo('favor')} activeOpacity={0.8}>
+            <TouchableOpacity
+              testID='favor'
+              style={styles.iconButton}
+              onPress={() => goTo('favor')}
+              activeOpacity={0.8}
+            >
               <Image
+                testID='favorIcon'
                 source={favorIcon}
                 style={{
                   ...styles.iconButtonImage,
@@ -65,7 +81,11 @@ export default function BottomBar({ navigateNewPost, changeScreen, screen }) {
         </View>
       </View>
       <View style={styles.addButtonBack}>
-        <TouchableOpacity onPress={navigateNewPost} activeOpacity={0.5}>
+        <TouchableOpacity
+          testID='navigateNewPost'
+          onPress={navigateNewPost}
+          activeOpacity={0.5}
+        >
           <View style={styles.addButton}>
             <View style={styles.plusIcon}>
               <View style={styles.plusVer}>

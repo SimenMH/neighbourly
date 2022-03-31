@@ -118,5 +118,19 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     backgroundColor: 'rgba(186, 164, 122, 0.15)'
+  },
+  voteButtonContainer: {
+    marginHorizontal: 10,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    paddingTop: 5,
+    backgroundColor: '#2196F3',
+    shadowColor: '#000',
+    borderRadius: 50,
+    width: 30,
+    height: 30
+  },
+  voteButtonText: {
+    color: '#fff'
   }
 });

@@ -12,10 +12,12 @@ router.get('/api/all/:pos', getAllController.getAll);
 
 // Routing for posts
 router.post('/api/post', postController.createPost); // Creates a new post
+router.put('/api/post/:id/vote', postController.upVotePost); // vote
 router.delete('/api/post/:id', postController.deletePost); // Deletes a post
 
 // Routing for notices
 router.post('/api/notice', noticeController.createNotice); // Creates a new post
+router.put('/api/notice/:id/vote', noticeController.upVoteNotice); // vote
 router.delete('/api/notice/:id', noticeController.deleteNotice); // Deletes a post
 
 // Routing for events
@@ -26,6 +28,7 @@ router.delete('/api/event/:id', eventController.deleteEvent); // Deletes a post
 // Routing for favors
 router.post('/api/favor', favorController.createFavor); // Creates a new post
 router.put('/api/favor/:id', favorController.resolveFavor); // Resolves a favor
+router.put('/api/favor/:id/vote', favorController.upVoteFavor); // vote
 router.delete('/api/favor/:id', favorController.deleteFavor); // Deletes a post
 
 module.exports = router;
