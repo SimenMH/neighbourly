@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Button, ActivityIndicator, Alert, TouchableOpacity, Text } from 'react-native';
+import {
+  View,
+  Image,
+  Button,
+  ActivityIndicator,
+  Alert,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 import { styles } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 
 import MapPreview from '../../components/map-preview/MapPreview.component';
 
-import backIcon from '../../assets/button-icons/back-icon.png';
+//import backIcon from '../../assets/button-icons/back-icon.png';
 
 export default function LocationPicker(props) {
   const [isFetching, setIsFetching] = useState(true);
@@ -17,9 +25,11 @@ export default function LocationPicker(props) {
     setIsFetching(true);
     const result = await Location.requestForegroundPermissionsAsync();
     if (result.status !== 'granted') {
-      Alert.alert('Insufficient permissions!', 'You need to grant location permissions to use this app.', [
-        { text: 'Okay' }
-      ]);
+      Alert.alert(
+        'Insufficient permissions!',
+        'You need to grant location permissions to use this app.',
+        [{ text: 'Okay' }]
+      );
       return false;
     }
     return true;
@@ -29,16 +39,20 @@ export default function LocationPicker(props) {
     try {
       const hasPermission = await verifyPermissions();
       if (hasPermission) {
-        const location = await Location.getCurrentPositionAsync({ timeout: 5000 });
+        const location = await Location.getCurrentPositionAsync({
+          timeout: 5000
+        });
         setPickedLocation({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude
         });
       }
     } catch (err) {
-      Alert.alert('Could not fetch location!', 'Please try again later or pick a location on the map.', [
-        { text: 'Okay' }
-      ]);
+      Alert.alert(
+        'Could not fetch location!',
+        'Please try again later or pick a location on the map.',
+        [{ text: 'Okay' }]
+      );
       console.error(err);
     }
     setIsFetching(false);
@@ -46,7 +60,9 @@ export default function LocationPicker(props) {
 
   const getLocationHandler = async () => {
     try {
-      const curSelectedLocation = await AsyncStorage.getItem('@neighbourly_location');
+      const curSelectedLocation = await AsyncStorage.getItem(
+        '@neighbourly_location'
+      );
       if (curSelectedLocation) {
         setHasLocation(true);
         setPickedLocation(JSON.parse(curSelectedLocation));
@@ -62,13 +78,16 @@ export default function LocationPicker(props) {
   const navigateToMapScreen = () => {
     props.navigation.navigate('MapScreen', {
       coordinates: pickedLocation,
-      onConfirm: coords => setPickedLocation(coords)
+      onConfirm: (coords) => setPickedLocation(coords)
     });
   };
 
   const confirmLocation = async () => {
     try {
-      await AsyncStorage.setItem('@neighbourly_location', JSON.stringify(pickedLocation));
+      await AsyncStorage.setItem(
+        '@neighbourly_location',
+        JSON.stringify(pickedLocation)
+      );
       props.navigation.reset({ index: 0, routes: [{ name: 'Main' }] });
     } catch (err) {
       Alert.alert('Something went wrong', 'Please try again later');
@@ -83,12 +102,19 @@ export default function LocationPicker(props) {
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
-        <TouchableOpacity onPress={confirmLocation} activeOpacity={0.5} disabled={isFetching}>
+        <TouchableOpacity
+          onPress={confirmLocation}
+          activeOpacity={0.5}
+          disabled={isFetching}
+        >
           <Text style={styles.barButton}>Confirm</Text>
         </TouchableOpacity>
         {hasLocation && (
-          <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
-            <Image source={backIcon} style={{ width: 40, height: 40 }} />
+          <TouchableOpacity
+            onPress={() => props.navigation.goBack()}
+            activeOpacity={0.5}
+          >
+            <Image source={'backIcon'} style={{ width: 40, height: 40 }} />
           </TouchableOpacity>
         )}
       </View>
@@ -96,8 +122,8 @@ export default function LocationPicker(props) {
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Neighbourly</Text>
         <Text style={styles.contentText}>
-          Before you can start using the app, please select your location! You will then start seeing posts
-          from neighbours around you!
+          Before you can start using the app, please select your location! You
+          will then start seeing posts from neighbours around you!
         </Text>
 
         <View style={styles.previewContainer}>
@@ -108,7 +134,9 @@ export default function LocationPicker(props) {
           )}
         </View>
 
-        <Text style={styles.contentTextWarning}>You can only change your location once every 30 days!</Text>
+        <Text style={styles.contentTextWarning}>
+          You can only change your location once every 30 days!
+        </Text>
 
         <View style={styles.mapButtons}>
           <View style={{ margin: 5 }}>

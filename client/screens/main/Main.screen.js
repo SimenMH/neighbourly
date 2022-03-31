@@ -9,6 +9,7 @@ import PostList from '../../components/post-list/PostList.component';
 import TopBar from '../../components/bars/TopBar.component';
 import BottomBar from '../../components/bars/BottomBar.component';
 import PostOptions from '../../components/post-options/PostOptions.component';
+import ApiService from '../../services/__mocks__/ApiService.service';
 
 import corkBackground from '../../assets/cork-texture01.jpg';
 
@@ -54,7 +55,7 @@ export default function Main({ navigation }) {
         });
       }
 
-      setPosts(newPosts);
+      setPosts(ApiService.getAll.home);
     } catch (err) {
       Alert.alert('Something went wrong', 'Please try again later');
       console.error(err);
@@ -172,6 +173,7 @@ export default function Main({ navigation }) {
         changeScreen={newScreen => goTo(newScreen)}
       />
       <PostOptions
+        data-testid="options"
         postOptions={postOptions}
         handleResolveFavor={() => handleResolveFavor()}
         handleDeletePost={() => handleDeletePost()}

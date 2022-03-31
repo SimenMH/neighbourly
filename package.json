@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "cd ./client && npm i . && cd ../server && npm i .",
+    "commit": "cz",
+    "start:server": "node ./server",
+    "start:client": "cd ./client && BROWSER=none npm start && cd ..",
+    "start:server-client": "start-test start:server 3001 start:client",
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:ci": "start-test start:server-client 19002 test",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -20,13 +28,40 @@
     "commitizen": "^4.2.3"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.2.0",
-    "eslint": "^7.24.0",
-    "eslint-plugin-react": "^7.23.2"
+    "@testing-library/cypress": "^7.0.6",
+    "@testing-library/react-native": "^7.2.0",
+    "babel-eslint": "^10.1.0",
+    "cypress": "^7.2.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-native": "^3.10.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "grunt": "^1.4.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-eslint": "^23.0.0",
+    "husky": "^6.0.0",
+    "load-grunt-tasks": "^5.1.0",
+    "prettier": "^2.2.1",
+    "start-server-and-test": "^1.12.1"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "singleQuote": true,
+    "semi": true,
+    "tabWidth": 2,
+    "bracketSpacing": true,
+    "jsxSingleQuote": true
   }
 }

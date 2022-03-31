@@ -1,6 +1,5 @@
 {
     "env": {
-        "commonjs": true,
         "es6": true,
         "node": true
     },
@@ -12,7 +11,8 @@
         "ecmaVersion": 11
     },
     "ignorePatterns": [
-      "node_modules/*.js"
+      "node_modules/*.js",
+      "cypress/*"
     ],
     "rules": {
         "indent": [
